@@ -22,7 +22,14 @@ from src.intelligence.news_filter import (
 
 load_dotenv()
 
-NEWS_API_KEY = os.getenv("NEWS_API_KEY")
+import streamlit as st
+
+NEWS_API_KEY = (
+    st.secrets.get("NEWS_API_KEY")
+    or os.getenv("NEWS_API_KEY")
+)
+
+print("NEWS API KEY LOADED:", NEWS_API_KEY is not None)
 
 # =====================================================
 # CONFIG
