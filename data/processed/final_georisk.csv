@@ -1,0 +1,125 @@
+Country,Year,total_deaths,conflict_events,Conflict,prev_conflict,prev_year_deaths,rolling_conflict_3yr,rolling_deaths_3yr,event_change,conflict_streak,Future_Conflict,Conflict_Probability,Risk_Level,Articles_Fetched,Raw_Score,Matched_Keywords,Top_Article_1,Top_Article_2,Top_Article_3,Top_Article_4,Top_Article_5,Source_1,Source_2,Source_3,URL_1,URL_2,URL_3,News_Risk_Score,Live_Risk_Level,GeoRisk_Live_Score,Dynamic_Risk_Level,Emerging_Threat
+Afghanistan,2023,360,176,1,1.0,1574.0,1.0,19598.0,-240.0,35,1,0.9822769901660368,Critical,21.0,104.0,"{'violence': 1, 'sanctions': 2, 'war': 4, 'attack': 1, 'border': 1, 'military': 3, 'crisis': 1}",The 10 countries with the highest birth rates — and the 10 with the lowest,Selling Children to Survive: Afghan Fathers Forced to Make Impossible Choices,37 Amazing Photos From the Set of the Film “The Man Who Would Be King” (1975),Graham Platner cruelly mocked a US soldier who nearly died protecting squad: ‘Stupid motherf—er didn’t deserve to live’,Left-wing Dem Senate hopeful cheered on Antifa violence in unearthed rant: ‘Kill a motherf---er’,Business Insider,Freerepublic.com,Vintag.es,https://www.businessinsider.com/countries-birth-rates-ranked,https://freerepublic.com/focus/f-news/4380179/posts,https://www.vintag.es/2026/05/the-man-who-would-be-king.html,0.9454545454545454,Critical,0.9712302567525892,Critical,False
+Iran,2023,43,13,1,1.0,251.0,1.0,193.0,-145.0,9,1,0.9573436763606042,Critical,24.0,110.0,"{'military': 2, 'war': 7, 'attack': 3}",Gateway of India boats to go electric in phased shift,What's happening between U.S. and Cuba? Here's a timeline of recent tensions,HC awards Rs 10L to bizman jailed after condiments flagged as heroin at airport,Memory makers brace for hydrogen fluoride pricing shock as Hormuz blockade impacts supply chain — key etching and cleaning material faces sharp cost increase amid trade disruption,Cuba’s President Warns There Will Be a “Bloodbath” If the US Attacks Cuba.,The Times of India,PBS,The Times of India,https://timesofindia.indiatimes.com/city/mumbai/gateway-of-india-boats-to-go-electric-in-phased-shift/articleshow/131231879.cms,https://www.pbs.org/newshour/world/whats-happening-between-u-s-and-cuba-heres-a-timeline-of-recent-tensions,https://timesofindia.indiatimes.com/city/bhopal/hc-awards-rs-10l-to-bizman-jailed-after-condiments-flagged-as-heroin-at-airport/articleshow/131231835.cms,1.0,Critical,0.9701405734524229,Critical,False
+Ukraine,2023,75393,10181,1,1.0,92615.0,1.0,31006.33333333333,2752.0,10,1,0.9971760605602504,Critical,23.0,87.0,"{'war': 4, 'military': 1, 'attack': 1, 'sanctions': 1, 'conflict': 1, 'invasion': 1, 'troops': 1}",The 10 countries with the highest birth rates — and the 10 with the lowest,Cuba’s President Warns There Will Be a “Bloodbath” If the US Attacks Cuba.,"UK Eases Sanctions Regime on Russia, Allowing Jet Fuel Imports, While Shunning Domestic Drilling",We call on all parties to conflict to protect civilians: UK statement at the UN Security Council,"How 8,000 robots are changing work inside logistics giant DHL Supply Chain",Business Insider,Thoughtcatalog.com,Breitbart News,https://www.businessinsider.com/countries-birth-rates-ranked,https://thoughtcatalog.com/chris-lavergne/2026/05/cubas-president-warns-there-will-be-a-bloodbath-if-the-us-attacks-cuba/,https://www.breitbart.com/europe/2026/05/20/energy-crisis-uk-eases-sanctions-on-russia-but-shuns-domestic-drilling/,0.7909090909090909,Critical,0.9352959696649026,Critical,False
+Syria,2023,2187,1006,1,1.0,1671.0,1.0,3103.0,213.0,13,1,0.994767249760166,Critical,25.0,81.0,"{'war': 3, 'conflict': 1, 'attack': 3, 'military': 1, 'sanctions': 1, 'inflation': 1}","Russian fighter jets flew so close to a British spy plane that they disabled its autopilot, UK says",The battle of perception: From Israel’s Fauda to Hezbollah’s FPV footage,Irrelevant Europe - Europe is the ‘jungle’ now. No garden left to speak of.,"Quality of pharmacy services and adherence to good pharmacy practice at points of sale in Punjab, Pakistan: A cross-sectional study",Trump is waging a silent war on legal immigration,Business Insider,Al Jazeera English,Freerepublic.com,https://www.businessinsider.com/russian-jets-flew-close-british-spy-plane-disabled-autopilot-uk-2026-5,https://www.aljazeera.com/features/2026/5/20/the-battle-of-perception-from-israels-fauda-to-hezbollahs-fpv-footage,https://freerepublic.com/focus/f-chat/4380158/posts,0.7363636363636363,High,0.917246165741207,Critical,False
+Israel,2023,27434,1200,1,1.0,98.0,0.6666666666666666,128.66666666666666,1155.0,3,1,0.9656158530694464,Critical,24.0,64.0,"{'war': 4, 'military': 1, 'attack': 2}","Bradley Foundation President And Prize Winners Talk Faith, Family And Freedom",Calls for winners of University of Galway's alumni awards to boycott event over links to Israel,"Barclays Raises PT on JFrog (FROG) From $70 To $75, Reiterates “Overweight” Rating",State Department settles lawsuit over $1.5B sent by Biden admin to Palestinian Authority,Trump is the Republican party,The Daily Caller,TheJournal.ie,Yahoo Entertainment,https://dailycaller.com/2026/05/20/bradley-foundation-prize-phil-gramm-meir-soloveichik-james-hankins-richard-graber/,https://www.thejournal.ie/calls-for-winners-of-university-of-galways-alumni-awards-to-boycott-event-over-links-to-israel-7045854-May2026/,https://finance.yahoo.com/markets/stocks/articles/barclays-raises-pt-jfrog-frog-170802468.html,0.5818181818181818,High,0.850476551694067,Critical,False
+India,2023,406,217,1,1.0,393.0,1.0,556.0,-49.0,35,1,0.9855426088667556,Critical,25.0,40.0,{'war': 4},Gateway of India boats to go electric in phased shift,Hexaware Acquires Consulting Professionals Services to Strengthen AI and Cloud Transformation Capabilities,Hexaware Acquires Consulting Professionals Services to Strengthen AI and Cloud Transformation Capabilities,How to read postcolonial writing,"Bajaj General Insurance rolls out riders to lock premiums, expand health cover scope",The Times of India,PR Newswire UK,PRNewswire,https://timesofindia.indiatimes.com/city/mumbai/gateway-of-india-boats-to-go-electric-in-phased-shift/articleshow/131231879.cms,https://www.prnewswire.co.uk/news-releases/hexaware-acquires-consulting-professionals-services-to-strengthen-ai-and-cloud-transformation-capabilities-302778005.html,https://www.prnewswire.com/news-releases/hexaware-acquires-consulting-professionals-services-to-strengthen-ai-and-cloud-transformation-capabilities-302778003.html,0.3636363636363636,Medium,0.7989707352976378,Critical,False
+Pakistan,2023,1178,382,1,1.0,719.0,1.0,526.6666666666666,98.0,35,1,0.9948103201801624,Critical,24.0,33.0,"{'war': 2, 'attack': 1, 'protest': 1}",Gateway of India boats to go electric in phased shift,HC awards Rs 10L to bizman jailed after condiments flagged as heroin at airport,"Jharkhand Minister Orders Debarment of Delayed Road Contractors, Focus on Quality",2 NCP (SP) corporators join BJP in Sangli,Jessica Pegula fires back after Buffalo Sabres controversy sparks brutal rich spoiled brat attack online,The Times of India,The Times of India,The Times of India,https://timesofindia.indiatimes.com/city/mumbai/gateway-of-india-boats-to-go-electric-in-phased-shift/articleshow/131231879.cms,https://timesofindia.indiatimes.com/city/bhopal/hc-awards-rs-10l-to-bizman-jailed-after-condiments-flagged-as-heroin-at-airport/articleshow/131231835.cms,https://timesofindia.indiatimes.com/city/ranchi/jharkhand-minister-orders-debarment-of-delayed-road-contractors-focus-on-quality/articleshow/131231673.cms,0.3,Medium,0.7863672241261136,Critical,False
+Mexico,2023,10899,2748,1,1.0,12555.0,1.0,13701.666666666666,569.0,20,1,0.9988541945958044,Critical,,,,,,,,,,,,,,,0.0,,0.699197936217063,High,False
+Myanmar (Burma),2023,3065,2085,1,1.0,2761.0,1.0,1583.0,536.0,35,1,0.9984625086984112,Critical,,,,,,,,,,,,,,,0.0,,0.6989237560888878,High,False
+Nigeria,2023,3971,626,1,1.0,2917.0,1.0,3055.6666666666665,155.0,28,1,0.9984148620476314,Critical,,,,,,,,,,,,,,,0.0,,0.698890403433342,High,False
+Colombia,2023,534,413,1,1.0,360.0,1.0,282.3333333333333,241.0,35,1,0.9977765536244216,Critical,,,,,,,,,,,,,,,0.0,,0.6984435875370951,High,False
+Sudan,2023,7837,375,1,1.0,1407.0,1.0,965.3333333333334,265.0,35,1,0.9976212930744632,Critical,,,,,,,,,,,,,,,0.0,,0.6983349051521243,High,False
+Brazil,2023,2481,2159,1,1.0,1703.0,1.0,2344.6666666666665,645.0,9,1,0.9971184909712536,Critical,,,,,,,,,,,,,,,0.0,,0.6979829436798775,High,False
+Cameroon,2023,638,294,1,1.0,667.0,1.0,762.0,69.0,10,1,0.9970110855240732,Critical,,,,,,,,,,,,,,,0.0,,0.6979077598668513,High,False
+Burkina Faso,2023,6122,599,1,1.0,2704.0,1.0,1776.3333333333333,362.0,8,1,0.9969023013467668,Critical,,,,,,,,,,,,,,,0.0,,0.6978316109427367,High,False
+Niger,2023,513,97,1,1.0,664.0,1.0,871.3333333333334,24.0,9,1,0.9961542341092368,Critical,,,,,,,,,,,,,,,0.0,,0.6973079638764657,High,False
+Kenya,2023,224,57,1,1.0,101.0,1.0,129.0,26.0,19,1,0.992371186054496,Critical,,,,,,,,,,,,,,,0.0,,0.6946598302381471,High,False
+Ethiopia,2023,2346,579,1,1.0,165025.0,1.0,106323.33333333331,-300.0,26,1,0.99127945630441,Critical,,,,,,,,,,,,,,,0.0,,0.693895619413087,High,False
+Somalia,2023,4216,247,1,1.0,3115.0,1.0,2501.333333333333,-91.0,35,1,0.9911717376827884,Critical,,,,,,,,,,,,,,,0.0,,0.6938202163779519,High,False
+Yemen (North Yemen),2023,931,319,1,1.0,3220.0,1.0,11145.666666666666,-136.0,15,1,0.9898794004210963,Critical,,,,,,,,,,,,,,,0.0,,0.6929155802947674,High,False
+DR Congo (Zaire),2023,3936,828,1,1.0,5967.0,1.0,4566.0,-371.0,35,1,0.9888849614580096,Critical,,,,,,,,,,,,,,,0.0,,0.6922194730206067,High,False
+Central African Republic,2023,423,86,1,1.0,773.0,1.0,717.3333333333334,-19.0,15,1,0.9876632865629668,Critical,,,,,,,,,,,,,,,0.0,,0.6913643005940767,High,False
+Mali,2023,2118,320,1,1.0,3656.0,1.0,2162.0,-89.0,12,1,0.9851813593594873,Critical,,,,,,,,,,,,,,,0.0,,0.689626951551641,High,False
+Mozambique,2023,271,100,1,1.0,717.0,1.0,1420.6666666666667,-168.0,6,1,0.984261188170218,Critical,,,,,,,,,,,,,,,0.0,,0.6889828317191525,High,False
+Chad,2023,112,11,1,1.0,114.0,1.0,343.3333333333333,-1.0,9,1,0.9841442158722484,Critical,,,,,,,,,,,,,,,0.0,,0.6889009511105738,High,False
+Iraq,2023,498,242,1,1.0,1027.0,1.0,995.3333333333334,-129.0,35,1,0.9834462844533284,Critical,,,,,,,,,,,,,,,0.0,,0.6884123991173299,High,False
+South Sudan,2023,224,10,1,1.0,728.0,1.0,789.0,-25.0,13,1,0.9821134655059904,Critical,,,,,,,,,,,,,,,0.0,,0.6874794258541933,High,False
+Philippines,2023,269,117,1,1.0,247.0,1.0,311.0,-11.0,35,1,0.9769730722791128,Critical,,,,,,,,,,,,,,,0.0,,0.6838811505953789,High,False
+Ecuador,2023,540,454,1,1.0,118.0,0.6666666666666666,140.0,443.0,3,1,0.9720936286671712,Critical,,,,,,,,,,,,,,,0.0,,0.6804655400670198,High,False
+Turkey,2023,108,58,1,1.0,107.0,1.0,155.0,-7.0,9,1,0.9715920085457638,Critical,,,,,,,,,,,,,,,0.0,,0.6801144059820347,High,False
+Indonesia,2023,94,39,1,1.0,64.0,1.0,55.66666666666666,6.0,6,1,0.9648549979318514,Critical,,,,,,,,,,,,,,,0.0,,0.675398498552296,High,False
+Russia (Soviet Union),2023,204,87,1,1.0,67.0,0.6666666666666666,34.0,55.0,2,1,0.9631566218585575,Critical,,,,,,,,,,,,,,,0.0,,0.6742096353009902,High,False
+Haiti,2023,454,49,1,1.0,236.0,1.0,180.66666666666663,-16.0,4,1,0.9554436180738224,Critical,,,,,,,,,,,,,,,0.0,,0.6688105326516757,High,False
+Azerbaijan,2023,442,11,1,1.0,154.0,1.0,2606.6666666666665,2.0,4,0,0.9428250537418836,Critical,,,,,,,,,,,,,,,0.0,,0.6599775376193185,High,False
+Togo,2023,76,20,1,1.0,62.0,0.3333333333333333,20.666666666666668,12.0,2,1,0.8602922582503425,Critical,,,,,,,,,,,,,,,0.0,,0.6022045807752398,High,False
+Benin,2023,46,20,1,1.0,30.0,0.3333333333333333,14.0,12.0,2,1,0.8392971167264288,Critical,,,,,,,,,,,,,,,0.0,,0.5875079817085002,High,False
+Lebanon,2023,123,39,1,0.0,0.0,0.0,6.666666666666667,39.0,1,1,0.8258817521331284,Critical,,,,,,,,,,,,,,,0.0,,0.5781172264931899,High,False
+Thailand,2023,31,25,1,1.0,36.0,1.0,41.333333333333336,-1.0,21,1,0.804503785524209,Critical,,,,,,,,,,,,,,,0.0,,0.5631526498669462,High,False
+Burundi,2023,125,39,1,1.0,48.0,1.0,91.33333333333331,-3.0,10,1,0.7945955467491698,Critical,,,,,,,,,,,,,,,0.0,,0.5562168827244188,High,False
+Bangladesh,2023,12,11,0,0.0,13.0,0.0,6.666666666666667,2.0,0,1,0.6986593344959038,High,,,,,,,,,,,,,,,0.0,,0.4890615341471326,Medium,False
+Honduras,2023,105,27,1,0.0,6.0,0.0,5.666666666666667,24.0,1,0,0.6221152569923519,High,,,,,,,,,,,,,,,0.0,,0.43548067989464634,Medium,False
+Ghana,2023,15,9,0,0.0,16.0,0.0,5.333333333333333,4.0,0,0,0.5967340376609013,High,,,,,,,,,,,,,,,0.0,,0.4177138263626309,Medium,False
+Kyrgyzstan,2023,0,0,0,1.0,68.0,0.6666666666666666,36.0,-32.0,0,0,0.5695392539708302,High,,,,,,,,,,,,,,,0.0,,0.39867747777958107,Medium,False
+Papua New Guinea,2023,1,1,0,1.0,109.0,0.6666666666666666,49.0,-15.0,0,1,0.5292410890289331,High,,,,,,,,,,,,,,,0.0,,0.3704687623202531,Medium,False
+France,2023,48,42,1,0.0,0.0,0.0,0.0,42.0,1,0,0.5290025873547521,High,,,,,,,,,,,,,,,0.0,,0.3703018111483265,Medium,False
+Angola,2023,0,1,0,0.0,21.0,0.3333333333333333,21.0,-16.0,0,1,0.5227768242065474,High,,,,,,,,,,,,,,,0.0,,0.36594377694458313,Medium,False
+Venezuela,2023,16,15,0,1.0,39.0,0.3333333333333333,21.33333333333333,-8.0,0,0,0.1465511825964811,Low,25.0,87.0,"{'military': 3, 'war': 4, 'attack': 2, 'sanctions': 1}",What's happening between U.S. and Cuba? Here's a timeline of recent tensions,Cuba’s President Warns There Will Be a “Bloodbath” If the US Attacks Cuba.,"Venezuela Fury, 16, and Noah Price, 19, lark around poolside as the newlyweds share fun videos from their £30k Marbella honeymoon",Trump’s Iran Regime-Change Plan Was Even Crazier Than Anyone Imagined,A Truly Bizarre Invocation of the “Unwilling or Unable” Test,PBS,Thoughtcatalog.com,Dailymail.com,https://www.pbs.org/newshour/world/whats-happening-between-u-s-and-cuba-heres-a-timeline-of-recent-tensions,https://thoughtcatalog.com/chris-lavergne/2026/05/cubas-president-warns-there-will-be-a-bloodbath-if-the-us-attacks-cuba/,https://www.dailymail.com/tvshowbiz/article-15834653/Venezuela-Fury-Noah-Price-Marbella-honeymoon.html,0.7909090909090909,Critical,0.33985855509026397,Medium,True
+Uganda,2023,79,12,1,1.0,25.0,0.3333333333333333,16.0,6.0,2,0,0.4481689206067135,Medium,,,,,,,,,,,,,,,0.0,,0.3137182444246994,Medium,False
+Saudi Arabia,2023,9,3,0,0.0,0.0,0.0,2.0,3.0,0,0,0.40236318828992,Medium,,,,,,,,,,,,,,,0.0,,0.28165423180294397,Medium,False
+Peru,2023,12,2,0,0.0,14.0,0.0,15.0,-1.0,0,0,0.3758821792287111,Medium,,,,,,,,,,,,,,,0.0,,0.26311752546009776,Medium,False
+Egypt,2023,6,4,0,1.0,236.0,1.0,302.3333333333333,-64.0,0,0,0.3518274640075933,Medium,,,,,,,,,,,,,,,0.0,,0.24627922480531528,Low,False
+China,2023,1,1,0,0.0,0.0,0.0,0.0,1.0,0,0,0.2020203200114487,Low,25.0,38.0,"{'war': 3, 'attack': 1}",Gateway of India boats to go electric in phased shift,HC awards Rs 10L to bizman jailed after condiments flagged as heroin at airport,The 10 countries with the highest birth rates — and the 10 with the lowest,Memory makers brace for hydrogen fluoride pricing shock as Hormuz blockade impacts supply chain — key etching and cleaning material faces sharp cost increase amid trade disruption,Middle Tennessee State U. Graduates Boo Music Executive Who Discovered Taylor Swift for Praising AI,The Times of India,The Times of India,Business Insider,https://timesofindia.indiatimes.com/city/mumbai/gateway-of-india-boats-to-go-electric-in-phased-shift/articleshow/131231879.cms,https://timesofindia.indiatimes.com/city/bhopal/hc-awards-rs-10l-to-bizman-jailed-after-condiments-flagged-as-heroin-at-airport/articleshow/131231835.cms,https://www.businessinsider.com/countries-birth-rates-ranked,0.3454545454545454,Medium,0.2450505876443777,Low,False
+Guatemala,2023,10,2,0,0.0,13.0,0.0,4.666666666666667,-1.0,0,1,0.3160698967398815,Medium,,,,,,,,,,,,,,,0.0,,0.22124892771791704,Low,False
+Algeria,2023,1,1,0,0.0,14.0,0.3333333333333333,20.0,-2.0,0,0,0.2990670148888132,Medium,,,,,,,,,,,,,,,0.0,,0.20934691042216924,Low,False
+Morocco,2023,5,2,0,0.0,14.0,0.0,7.333333333333333,-2.0,0,0,0.2670308155415142,Medium,,,,,,,,,,,,,,,0.0,,0.18692157087905992,Low,False
+Tunisia,2023,3,1,0,0.0,3.0,0.0,11.0,0.0,0,0,0.2606606837209229,Medium,,,,,,,,,,,,,,,0.0,,0.182462478604646,Low,False
+Poland,2023,0,0,0,0.0,2.0,0.0,0.6666666666666666,-1.0,0,0,0.2411174264361545,Low,,,,,,,,,,,,,,,0.0,,0.16878219850530815,Low,False
+Kingdom of eSwatini (Swaziland),2023,3,2,0,0.0,2.0,0.3333333333333333,17.333333333333332,0.0,0,0,0.2286967948509041,Low,,,,,,,,,,,,,,,0.0,,0.16008775639563286,Low,False
+Armenia,2023,20,10,0,1.0,154.0,0.3333333333333333,58.0,2.0,0,0,0.2210991146866435,Low,,,,,,,,,,,,,,,0.0,,0.15476938028065043,Low,False
+Nepal,2023,0,0,0,0.0,1.0,0.0,0.3333333333333333,-1.0,0,0,0.2064686602678909,Low,,,,,,,,,,,,,,,0.0,,0.14452806218752362,Low,False
+United States of America,2023,0,0,0,0.0,1.0,0.0,0.3333333333333333,-1.0,0,0,0.2064686602678909,Low,,,,,,,,,,,,,,,0.0,,0.14452806218752362,Low,False
+Madagascar (Malagasy),2023,0,0,0,0.0,0.0,0.0,7.666666666666667,0.0,0,0,0.206139943238683,Low,,,,,,,,,,,,,,,0.0,,0.14429796026707808,Low,False
+Georgia,2023,1,1,0,0.0,0.0,0.0,0.0,1.0,0,0,0.2020203200114487,Low,,,,,,,,,,,,,,,0.0,,0.1414142240080141,Low,False
+Belgium,2023,2,1,0,0.0,0.0,0.0,0.0,1.0,0,0,0.2020203200114487,Low,,,,,,,,,,,,,,,0.0,,0.1414142240080141,Low,False
+Spain,2023,2,1,0,0.0,0.0,0.0,0.0,1.0,0,0,0.2020203200114487,Low,,,,,,,,,,,,,,,0.0,,0.1414142240080141,Low,False
+Paraguay,2023,0,0,0,0.0,0.0,0.0,1.6666666666666667,0.0,0,0,0.200987836760613,Low,,,,,,,,,,,,,,,0.0,,0.1406914857324291,Low,False
+Ivory Coast,2023,0,0,0,0.0,0.0,0.0,1.0,0.0,0,0,0.1924230177346629,Low,,,,,,,,,,,,,,,0.0,,0.13469611241426402,Low,False
+Djibouti,2023,0,0,0,0.0,0.0,0.0,1.0,0.0,0,0,0.1924230177346629,Low,,,,,,,,,,,,,,,0.0,,0.13469611241426402,Low,False
+Austria,2023,0,0,0,0.0,0.0,0.0,1.3333333333333333,0.0,0,0,0.191773195624242,Low,,,,,,,,,,,,,,,0.0,,0.13424123693696938,Low,False
+Mauritania,2023,6,2,0,0.0,0.0,0.0,0.0,2.0,0,0,0.1875882294897141,Low,,,,,,,,,,,,,,,0.0,,0.13131176064279987,Low,False
+Libya,2023,2,1,0,0.0,13.0,0.3333333333333333,238.3333333333333,-6.0,0,0,0.1561517095998746,Low,,,,,,,,,,,,,,,0.0,,0.10930619671991221,Low,False
+Rwanda,2023,0,0,0,0.0,8.0,0.0,5.0,-3.0,0,0,0.1553213093286918,Low,,,,,,,,,,,,,,,0.0,,0.10872491653008425,Low,False
+United Arab Emirates,2023,0,0,0,0.0,3.0,0.0,1.0,-1.0,0,0,0.155193046298349,Low,,,,,,,,,,,,,,,0.0,,0.1086351324088443,Low,False
+Bolivia,2023,1,1,0,0.0,0.0,0.0,0.3333333333333333,1.0,0,0,0.1501893396598391,Low,,,,,,,,,,,,,,,0.0,,0.10513253776188737,Low,False
+South Africa,2023,5,5,0,0.0,4.0,0.6666666666666666,52.0,1.0,0,0,0.1389392180581491,Low,,,,,,,,,,,,,,,0.0,,0.09725745264070436,Low,False
+Tajikistan,2023,0,0,0,1.0,87.0,0.3333333333333333,34.333333333333336,-26.0,0,0,0.1324770549957658,Low,,,,,,,,,,,,,,,0.0,,0.09273393849703604,Low,False
+Liberia,2023,0,0,0,0.0,0.0,0.0,0.6666666666666666,0.0,0,0,0.1140581214419055,Low,,,,,,,,,,,,,,,0.0,,0.07984068500933385,Low,False
+Zimbabwe (Rhodesia),2023,0,0,0,0.0,0.0,0.0,0.6666666666666666,0.0,0,0,0.1140581214419055,Low,,,,,,,,,,,,,,,0.0,,0.07984068500933385,Low,False
+Sierra Leone,2023,0,0,0,0.0,0.0,0.0,0.3333333333333333,0.0,0,0,0.1104034278214121,Low,,,,,,,,,,,,,,,0.0,,0.07728239947498847,Low,False
+Tanzania,2023,0,0,0,0.0,4.0,0.6666666666666666,24.666666666666668,-3.0,0,0,0.0990451437906912,Low,,,,,,,,,,,,,,,0.0,,0.06933160065348383,Low,False
+Congo,2023,0,0,0,0.0,3.0,0.0,1.0,-2.0,0,0,0.0973400989578635,Low,,,,,,,,,,,,,,,0.0,,0.06813806927050445,Low,False
+El Salvador,2023,0,0,0,1.0,88.0,0.3333333333333333,32.333333333333336,-68.0,0,0,0.0954333804400087,Low,,,,,,,,,,,,,,,0.0,,0.06680336630800608,Low,False
+Eritrea,2023,0,0,0,0.0,4.0,0.0,1.3333333333333333,-4.0,0,0,0.0830331228524061,Low,,,,,,,,,,,,,,,0.0,,0.05812318599668427,Low,False
+Albania,2023,0,0,0,0.0,0.0,0.0,0.0,0.0,0,0,0.0715552489119881,Low,,,,,,,,,,,,,,,0.0,,0.05008867423839167,Low,False
+Bahrain,2023,0,0,0,0.0,0.0,0.0,0.0,0.0,0,0,0.0715552489119881,Low,,,,,,,,,,,,,,,0.0,,0.05008867423839167,Low,False
+Australia,2023,0,0,0,0.0,0.0,0.0,0.0,0.0,0,0,0.0715552489119881,Low,,,,,,,,,,,,,,,0.0,,0.05008867423839167,Low,False
+Argentina,2023,0,0,0,0.0,0.0,0.0,0.0,0.0,0,0,0.0715552489119881,Low,,,,,,,,,,,,,,,0.0,,0.05008867423839167,Low,False
+Bosnia-Herzegovina,2023,0,0,0,0.0,0.0,0.0,0.0,0.0,0,0,0.0715552489119881,Low,,,,,,,,,,,,,,,0.0,,0.05008867423839167,Low,False
+Botswana,2023,0,0,0,0.0,0.0,0.0,0.0,0.0,0,0,0.0715552489119881,Low,,,,,,,,,,,,,,,0.0,,0.05008867423839167,Low,False
+Cambodia (Kampuchea),2023,0,0,0,0.0,0.0,0.0,0.0,0.0,0,0,0.0715552489119881,Low,,,,,,,,,,,,,,,0.0,,0.05008867423839167,Low,False
+Canada,2023,0,0,0,0.0,0.0,0.0,0.0,0.0,0,0,0.0715552489119881,Low,,,,,,,,,,,,,,,0.0,,0.05008867423839167,Low,False
+Comoros,2023,0,0,0,0.0,0.0,0.0,0.0,0.0,0,0,0.0715552489119881,Low,,,,,,,,,,,,,,,0.0,,0.05008867423839167,Low,False
+Romania,2023,0,0,0,0.0,0.0,0.0,0.0,0.0,0,0,0.0715552489119881,Low,,,,,,,,,,,,,,,0.0,,0.05008867423839167,Low,False
+Kuwait,2023,0,0,0,0.0,0.0,0.0,0.0,0.0,0,0,0.0715552489119881,Low,,,,,,,,,,,,,,,0.0,,0.05008867423839167,Low,False
+Italy,2023,0,0,0,0.0,0.0,0.0,0.0,0.0,0,0,0.0715552489119881,Low,,,,,,,,,,,,,,,0.0,,0.05008867423839167,Low,False
+Jordan,2023,0,0,0,0.0,0.0,0.0,0.0,0.0,0,0,0.0715552489119881,Low,,,,,,,,,,,,,,,0.0,,0.05008867423839167,Low,False
+Guinea-Bissau,2023,0,0,0,0.0,0.0,0.0,0.0,0.0,0,0,0.0715552489119881,Low,,,,,,,,,,,,,,,0.0,,0.05008867423839167,Low,False
+Guyana,2023,0,0,0,0.0,0.0,0.0,0.0,0.0,0,0,0.0715552489119881,Low,,,,,,,,,,,,,,,0.0,,0.05008867423839167,Low,False
+Germany,2023,0,0,0,0.0,0.0,0.0,0.0,0.0,0,0,0.0715552489119881,Low,,,,,,,,,,,,,,,0.0,,0.05008867423839167,Low,False
+Jamaica,2023,0,0,0,0.0,0.0,0.0,0.0,0.0,0,0,0.0715552489119881,Low,,,,,,,,,,,,,,,0.0,,0.05008867423839167,Low,False
+Croatia,2023,0,0,0,0.0,0.0,0.0,0.0,0.0,0,0,0.0715552489119881,Low,,,,,,,,,,,,,,,0.0,,0.05008867423839167,Low,False
+Gambia,2023,0,0,0,0.0,0.0,0.0,0.0,0.0,0,0,0.0715552489119881,Low,,,,,,,,,,,,,,,0.0,,0.05008867423839167,Low,False
+Bhutan,2023,0,0,0,0.0,0.0,0.0,0.0,0.0,0,0,0.0715552489119881,Low,,,,,,,,,,,,,,,0.0,,0.05008867423839167,Low,False
+Laos,2023,0,0,0,0.0,0.0,0.0,0.0,0.0,0,0,0.0715552489119881,Low,,,,,,,,,,,,,,,0.0,,0.05008867423839167,Low,False
+Malaysia,2023,0,0,0,0.0,0.0,0.0,0.0,0.0,0,0,0.0715552489119881,Low,,,,,,,,,,,,,,,0.0,,0.05008867423839167,Low,False
+Lesotho,2023,0,0,0,0.0,0.0,0.0,0.0,0.0,0,0,0.0715552489119881,Low,,,,,,,,,,,,,,,0.0,,0.05008867423839167,Low,False
+Malta,2023,0,0,0,0.0,0.0,0.0,0.0,0.0,0,0,0.0715552489119881,Low,,,,,,,,,,,,,,,0.0,,0.05008867423839167,Low,False
+Moldova,2023,0,0,0,0.0,0.0,0.0,0.0,0.0,0,0,0.0715552489119881,Low,,,,,,,,,,,,,,,0.0,,0.05008867423839167,Low,False
+Sweden,2023,0,0,0,0.0,0.0,0.0,0.0,0.0,0,0,0.0715552489119881,Low,,,,,,,,,,,,,,,0.0,,0.05008867423839167,Low,False
+Qatar,2023,0,0,0,0.0,0.0,0.0,0.0,0.0,0,0,0.0715552489119881,Low,,,,,,,,,,,,,,,0.0,,0.05008867423839167,Low,False
+Panama,2023,0,0,0,0.0,0.0,0.0,0.0,0.0,0,0,0.0715552489119881,Low,,,,,,,,,,,,,,,0.0,,0.05008867423839167,Low,False
+North Macedonia,2023,0,0,0,0.0,0.0,0.0,0.0,0.0,0,0,0.0715552489119881,Low,,,,,,,,,,,,,,,0.0,,0.05008867423839167,Low,False
+Nicaragua,2023,0,0,0,0.0,0.0,0.0,0.0,0.0,0,0,0.0715552489119881,Low,,,,,,,,,,,,,,,0.0,,0.05008867423839167,Low,False
+Netherlands,2023,0,0,0,0.0,0.0,0.0,0.0,0.0,0,0,0.0715552489119881,Low,,,,,,,,,,,,,,,0.0,,0.05008867423839167,Low,False
+Namibia,2023,0,0,0,0.0,0.0,0.0,0.0,0.0,0,0,0.0715552489119881,Low,,,,,,,,,,,,,,,0.0,,0.05008867423839167,Low,False
+Senegal,2023,0,0,0,0.0,0.0,0.0,0.0,0.0,0,0,0.0715552489119881,Low,,,,,,,,,,,,,,,0.0,,0.05008867423839167,Low,False
+Trinidad and Tobago,2023,0,0,0,0.0,0.0,0.0,0.0,0.0,0,0,0.0715552489119881,Low,,,,,,,,,,,,,,,0.0,,0.05008867423839167,Low,False
+Sri Lanka,2023,0,0,0,0.0,0.0,0.0,0.0,0.0,0,0,0.0715552489119881,Low,,,,,,,,,,,,,,,0.0,,0.05008867423839167,Low,False
+Serbia (Yugoslavia),2023,0,0,0,0.0,0.0,0.0,0.0,0.0,0,0,0.0715552489119881,Low,,,,,,,,,,,,,,,0.0,,0.05008867423839167,Low,False
+Solomon Islands,2023,0,0,0,0.0,0.0,0.0,0.0,0.0,0,0,0.0715552489119881,Low,,,,,,,,,,,,,,,0.0,,0.05008867423839167,Low,False
+Uzbekistan,2023,0,0,0,0.0,0.0,0.0,0.0,0.0,0,0,0.0715552489119881,Low,,,,,,,,,,,,,,,0.0,,0.05008867423839167,Low,False
+United Kingdom,2023,0,0,0,0.0,0.0,0.0,0.0,0.0,0,0,0.0715552489119881,Low,,,,,,,,,,,,,,,0.0,,0.05008867423839167,Low,False
+Zambia,2023,0,0,0,0.0,0.0,0.0,0.0,0.0,0,0,0.0715552489119881,Low,,,,,,,,,,,,,,,0.0,,0.05008867423839167,Low,False
+Guinea,2023,0,0,0,0.0,0.0,0.3333333333333333,16.666666666666668,0.0,0,0,0.0383137047693436,Low,,,,,,,,,,,,,,,0.0,,0.026819593338540518,Low,False

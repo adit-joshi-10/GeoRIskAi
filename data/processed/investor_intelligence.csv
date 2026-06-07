@@ -1,0 +1,125 @@
+Country,GeoRisk_Live_Score,Dynamic_Risk_Level,Affected_Sectors,Market_Impact,Investor_Alert
+Afghanistan,0.971,Critical,Regional Markets,Severe,Afghanistan shows Critical geopolitical risk. Potential exposure detected in: Regional Markets.
+Iran,0.97,Critical,"Oil, Energy, Shipping",Severe,"Iran shows Critical geopolitical risk. Potential exposure detected in: Oil, Energy, Shipping."
+Ukraine,0.935,Critical,"Agriculture, Food Supply, Grain Exports",Severe,"Ukraine shows Critical geopolitical risk. Potential exposure detected in: Agriculture, Food Supply, Grain Exports."
+Syria,0.917,Critical,Regional Markets,Severe,Syria shows Critical geopolitical risk. Potential exposure detected in: Regional Markets.
+Israel,0.85,Critical,"Cybersecurity, Defense Technology",Severe,"Israel shows Critical geopolitical risk. Potential exposure detected in: Cybersecurity, Defense Technology."
+India,0.799,Critical,"IT Services, Manufacturing, Energy",Severe,"India shows Critical geopolitical risk. Potential exposure detected in: IT Services, Manufacturing, Energy."
+Pakistan,0.786,Critical,Regional Markets,Severe,Pakistan shows Critical geopolitical risk. Potential exposure detected in: Regional Markets.
+Mexico,0.699,High,Regional Markets,High,Mexico shows High geopolitical risk. Potential exposure detected in: Regional Markets.
+Myanmar (Burma),0.699,High,Regional Markets,High,Myanmar (Burma) shows High geopolitical risk. Potential exposure detected in: Regional Markets.
+Nigeria,0.699,High,Regional Markets,High,Nigeria shows High geopolitical risk. Potential exposure detected in: Regional Markets.
+Colombia,0.698,High,Regional Markets,High,Colombia shows High geopolitical risk. Potential exposure detected in: Regional Markets.
+Sudan,0.698,High,Regional Markets,High,Sudan shows High geopolitical risk. Potential exposure detected in: Regional Markets.
+Brazil,0.698,High,Regional Markets,High,Brazil shows High geopolitical risk. Potential exposure detected in: Regional Markets.
+Cameroon,0.698,High,Regional Markets,High,Cameroon shows High geopolitical risk. Potential exposure detected in: Regional Markets.
+Burkina Faso,0.698,High,Regional Markets,High,Burkina Faso shows High geopolitical risk. Potential exposure detected in: Regional Markets.
+Niger,0.697,High,Regional Markets,High,Niger shows High geopolitical risk. Potential exposure detected in: Regional Markets.
+Kenya,0.695,High,Regional Markets,High,Kenya shows High geopolitical risk. Potential exposure detected in: Regional Markets.
+Ethiopia,0.694,High,Regional Markets,High,Ethiopia shows High geopolitical risk. Potential exposure detected in: Regional Markets.
+Somalia,0.694,High,Regional Markets,High,Somalia shows High geopolitical risk. Potential exposure detected in: Regional Markets.
+Yemen (North Yemen),0.693,High,Regional Markets,High,Yemen (North Yemen) shows High geopolitical risk. Potential exposure detected in: Regional Markets.
+DR Congo (Zaire),0.692,High,Regional Markets,High,DR Congo (Zaire) shows High geopolitical risk. Potential exposure detected in: Regional Markets.
+Central African Republic,0.691,High,Regional Markets,High,Central African Republic shows High geopolitical risk. Potential exposure detected in: Regional Markets.
+Mali,0.69,High,Regional Markets,High,Mali shows High geopolitical risk. Potential exposure detected in: Regional Markets.
+Mozambique,0.689,High,Regional Markets,High,Mozambique shows High geopolitical risk. Potential exposure detected in: Regional Markets.
+Chad,0.689,High,Regional Markets,High,Chad shows High geopolitical risk. Potential exposure detected in: Regional Markets.
+Iraq,0.688,High,Regional Markets,High,Iraq shows High geopolitical risk. Potential exposure detected in: Regional Markets.
+South Sudan,0.687,High,Regional Markets,High,South Sudan shows High geopolitical risk. Potential exposure detected in: Regional Markets.
+Philippines,0.684,High,Regional Markets,High,Philippines shows High geopolitical risk. Potential exposure detected in: Regional Markets.
+Ecuador,0.68,High,Regional Markets,High,Ecuador shows High geopolitical risk. Potential exposure detected in: Regional Markets.
+Turkey,0.68,High,Regional Markets,High,Turkey shows High geopolitical risk. Potential exposure detected in: Regional Markets.
+Indonesia,0.675,High,Regional Markets,High,Indonesia shows High geopolitical risk. Potential exposure detected in: Regional Markets.
+Russia (Soviet Union),0.674,High,Regional Markets,High,Russia (Soviet Union) shows High geopolitical risk. Potential exposure detected in: Regional Markets.
+Haiti,0.669,High,Regional Markets,High,Haiti shows High geopolitical risk. Potential exposure detected in: Regional Markets.
+Azerbaijan,0.66,High,Regional Markets,High,Azerbaijan shows High geopolitical risk. Potential exposure detected in: Regional Markets.
+Togo,0.602,High,Regional Markets,High,Togo shows High geopolitical risk. Potential exposure detected in: Regional Markets.
+Benin,0.588,High,Regional Markets,High,Benin shows High geopolitical risk. Potential exposure detected in: Regional Markets.
+Lebanon,0.578,High,Regional Markets,High,Lebanon shows High geopolitical risk. Potential exposure detected in: Regional Markets.
+Thailand,0.563,High,Regional Markets,High,Thailand shows High geopolitical risk. Potential exposure detected in: Regional Markets.
+Burundi,0.556,High,Regional Markets,High,Burundi shows High geopolitical risk. Potential exposure detected in: Regional Markets.
+Bangladesh,0.489,Medium,Regional Markets,Moderate,Bangladesh shows Medium geopolitical risk. Potential exposure detected in: Regional Markets.
+Honduras,0.435,Medium,Regional Markets,Moderate,Honduras shows Medium geopolitical risk. Potential exposure detected in: Regional Markets.
+Ghana,0.418,Medium,Regional Markets,Moderate,Ghana shows Medium geopolitical risk. Potential exposure detected in: Regional Markets.
+Kyrgyzstan,0.399,Medium,Regional Markets,Moderate,Kyrgyzstan shows Medium geopolitical risk. Potential exposure detected in: Regional Markets.
+Papua New Guinea,0.37,Medium,Regional Markets,Moderate,Papua New Guinea shows Medium geopolitical risk. Potential exposure detected in: Regional Markets.
+France,0.37,Medium,Regional Markets,Moderate,France shows Medium geopolitical risk. Potential exposure detected in: Regional Markets.
+Angola,0.366,Medium,Regional Markets,Moderate,Angola shows Medium geopolitical risk. Potential exposure detected in: Regional Markets.
+Venezuela,0.34,Medium,Regional Markets,Moderate,Venezuela shows Medium geopolitical risk. Potential exposure detected in: Regional Markets.
+Uganda,0.314,Medium,Regional Markets,Moderate,Uganda shows Medium geopolitical risk. Potential exposure detected in: Regional Markets.
+Saudi Arabia,0.282,Medium,Regional Markets,Moderate,Saudi Arabia shows Medium geopolitical risk. Potential exposure detected in: Regional Markets.
+Peru,0.263,Medium,Regional Markets,Moderate,Peru shows Medium geopolitical risk. Potential exposure detected in: Regional Markets.
+Egypt,0.246,Low,Regional Markets,Low,Egypt shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+China,0.245,Low,"Manufacturing, Supply Chains, Technology",Low,"China shows Low geopolitical risk. Potential exposure detected in: Manufacturing, Supply Chains, Technology."
+Guatemala,0.221,Low,Regional Markets,Low,Guatemala shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Algeria,0.209,Low,Regional Markets,Low,Algeria shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Morocco,0.187,Low,Regional Markets,Low,Morocco shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Tunisia,0.182,Low,Regional Markets,Low,Tunisia shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Poland,0.169,Low,Regional Markets,Low,Poland shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Kingdom of eSwatini (Swaziland),0.16,Low,Regional Markets,Low,Kingdom of eSwatini (Swaziland) shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Armenia,0.155,Low,Regional Markets,Low,Armenia shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Nepal,0.145,Low,Regional Markets,Low,Nepal shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+United States of America,0.145,Low,Regional Markets,Low,United States of America shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Madagascar (Malagasy),0.144,Low,Regional Markets,Low,Madagascar (Malagasy) shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Georgia,0.141,Low,Regional Markets,Low,Georgia shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Belgium,0.141,Low,Regional Markets,Low,Belgium shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Spain,0.141,Low,Regional Markets,Low,Spain shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Paraguay,0.141,Low,Regional Markets,Low,Paraguay shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Ivory Coast,0.135,Low,Regional Markets,Low,Ivory Coast shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Djibouti,0.135,Low,Regional Markets,Low,Djibouti shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Austria,0.134,Low,Regional Markets,Low,Austria shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Mauritania,0.131,Low,Regional Markets,Low,Mauritania shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Libya,0.109,Low,Regional Markets,Low,Libya shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Rwanda,0.109,Low,Regional Markets,Low,Rwanda shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+United Arab Emirates,0.109,Low,Regional Markets,Low,United Arab Emirates shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Bolivia,0.105,Low,Regional Markets,Low,Bolivia shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+South Africa,0.097,Low,Regional Markets,Low,South Africa shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Tajikistan,0.093,Low,Regional Markets,Low,Tajikistan shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Liberia,0.08,Low,Regional Markets,Low,Liberia shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Zimbabwe (Rhodesia),0.08,Low,Regional Markets,Low,Zimbabwe (Rhodesia) shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Sierra Leone,0.077,Low,Regional Markets,Low,Sierra Leone shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Tanzania,0.069,Low,Regional Markets,Low,Tanzania shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Congo,0.068,Low,Regional Markets,Low,Congo shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+El Salvador,0.067,Low,Regional Markets,Low,El Salvador shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Eritrea,0.058,Low,Regional Markets,Low,Eritrea shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Albania,0.05,Low,Regional Markets,Low,Albania shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Bahrain,0.05,Low,Regional Markets,Low,Bahrain shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Australia,0.05,Low,Regional Markets,Low,Australia shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Argentina,0.05,Low,Regional Markets,Low,Argentina shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Bosnia-Herzegovina,0.05,Low,Regional Markets,Low,Bosnia-Herzegovina shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Botswana,0.05,Low,Regional Markets,Low,Botswana shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Cambodia (Kampuchea),0.05,Low,Regional Markets,Low,Cambodia (Kampuchea) shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Canada,0.05,Low,Regional Markets,Low,Canada shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Comoros,0.05,Low,Regional Markets,Low,Comoros shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Romania,0.05,Low,Regional Markets,Low,Romania shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Kuwait,0.05,Low,Regional Markets,Low,Kuwait shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Italy,0.05,Low,Regional Markets,Low,Italy shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Jordan,0.05,Low,Regional Markets,Low,Jordan shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Guinea-Bissau,0.05,Low,Regional Markets,Low,Guinea-Bissau shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Guyana,0.05,Low,Regional Markets,Low,Guyana shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Germany,0.05,Low,Regional Markets,Low,Germany shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Jamaica,0.05,Low,Regional Markets,Low,Jamaica shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Croatia,0.05,Low,Regional Markets,Low,Croatia shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Gambia,0.05,Low,Regional Markets,Low,Gambia shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Bhutan,0.05,Low,Regional Markets,Low,Bhutan shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Laos,0.05,Low,Regional Markets,Low,Laos shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Malaysia,0.05,Low,Regional Markets,Low,Malaysia shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Lesotho,0.05,Low,Regional Markets,Low,Lesotho shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Malta,0.05,Low,Regional Markets,Low,Malta shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Moldova,0.05,Low,Regional Markets,Low,Moldova shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Sweden,0.05,Low,Regional Markets,Low,Sweden shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Qatar,0.05,Low,Regional Markets,Low,Qatar shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Panama,0.05,Low,Regional Markets,Low,Panama shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+North Macedonia,0.05,Low,Regional Markets,Low,North Macedonia shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Nicaragua,0.05,Low,Regional Markets,Low,Nicaragua shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Netherlands,0.05,Low,Regional Markets,Low,Netherlands shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Namibia,0.05,Low,Regional Markets,Low,Namibia shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Senegal,0.05,Low,Regional Markets,Low,Senegal shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Trinidad and Tobago,0.05,Low,Regional Markets,Low,Trinidad and Tobago shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Sri Lanka,0.05,Low,Regional Markets,Low,Sri Lanka shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Serbia (Yugoslavia),0.05,Low,Regional Markets,Low,Serbia (Yugoslavia) shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Solomon Islands,0.05,Low,Regional Markets,Low,Solomon Islands shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Uzbekistan,0.05,Low,Regional Markets,Low,Uzbekistan shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+United Kingdom,0.05,Low,Regional Markets,Low,United Kingdom shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Zambia,0.05,Low,Regional Markets,Low,Zambia shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
+Guinea,0.027,Low,Regional Markets,Low,Guinea shows Low geopolitical risk. Potential exposure detected in: Regional Markets.
