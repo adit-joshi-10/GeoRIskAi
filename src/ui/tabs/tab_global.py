@@ -13,7 +13,17 @@ def render_global_tab(
     PLOTLY_LAYOUT
 ):
 
-    col_map, col_alerts = st.columns([2, 1])
+    # Mobile Detection
+    mobile = st.session_state.get(
+        "is_mobile",
+        False
+    )
+
+    if mobile:
+        col_map = st.container()
+        col_alerts = st.container()
+    else:
+        col_map, col_alerts = st.columns([2, 1])
 
     # =================================================
     # MAP SECTION

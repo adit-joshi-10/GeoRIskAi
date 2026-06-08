@@ -10,8 +10,6 @@ import requests
 import os
 import time
 
-from dotenv import load_dotenv
-
 from src.intelligence.news_filter import (
     is_relevant_geopolitical
 )
@@ -20,14 +18,18 @@ from src.intelligence.news_filter import (
 # LOAD ENV VARIABLES
 # =====================================================
 
-load_dotenv()
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except Exception as e:
+    print("DOTENV ERROR:", e)
 
 import streamlit as st
 
-NEWS_API_KEY = (
-    st.secrets.get("NEWS_API_KEY")
-    or os.getenv("NEWS_API_KEY")
-)
+try:
+    NEWS_API_KEY = st.secrets["NEWS_API_KEY"]
+except:
+    NEWS_API_KEY = ""
 
 print("NEWS API KEY LOADED:", NEWS_API_KEY is not None)
 

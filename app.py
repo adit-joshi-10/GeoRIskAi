@@ -1,9 +1,14 @@
 import streamlit as st
+    
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import os
 import time
+import streamlit as st
+
+if "mobile_mode" not in st.session_state:
+    st.session_state.mobile_mode = False
 from src.intelligence.news_engine import fetch_country_news
 
 from src.ui.intelligence_core import (
@@ -411,16 +416,13 @@ with layout[0]:
 main_col, side_col = st.columns([4, 1])
 
 # =====================================================
-## =====================================================
 # TAB 1 — GLOBAL OVERVIEW
 # =====================================================
 
 with tab1:
 
     render_global_tab(
-
         filtered_df,
-
         PLOTLY_LAYOUT
     )
 # =====================================================
