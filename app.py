@@ -270,7 +270,195 @@ html, body, .stApp {
 .geo-footer { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.15em; color: var(--text3); text-align: center; padding: 2rem 0 1rem; text-transform: uppercase; border-top: 1px solid var(--border); margin-top: 3rem; }
 
 [data-baseweb="select"] > div { background: var(--panel) !important; border-color: var(--border2) !important; font-family: var(--mono) !important; font-size: 0.8rem !important; }
-</style>
+/* ── RESPONSIVE BREAKPOINTS ── */
+
+/* Tablet — 768px to 1024px */
+@media (max-width: 1024px) {
+    .block-container {
+        padding: 1rem 1rem 2rem !important;
+    }
+    .geo-header {
+        padding: 0.8rem 1rem;
+        margin: -1rem -1rem 1.5rem -1rem;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    .geo-logo {
+        font-size: 1.2rem !important;
+    }
+    .geo-status {
+        gap: 0.8rem;
+    }
+    [data-testid="metric-container"] [data-testid="stMetricValue"] {
+        font-size: 1.5rem !important;
+    }
+    .ticker-wrap {
+        font-size: 0.6rem;
+    }
+    .stTabs [data-baseweb="tab"] {
+        padding: 0.5rem 0.8rem !important;
+        font-size: 0.65rem !important;
+    }
+    .signal-card {
+        padding: 0.8rem 1rem;
+    }
+    .sig-score-big {
+        font-size: 1.2rem;
+    }
+    .ai-card {
+        padding: 1rem;
+    }
+}
+
+/* Mobile — below 768px */
+@media (max-width: 768px) {
+    .block-container {
+        padding: 0.5rem 0.5rem 2rem !important;
+    }
+    .geo-header {
+        padding: 0.6rem 0.8rem;
+        margin: -0.5rem -0.5rem 1rem -0.5rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.6rem;
+    }
+    .geo-logo {
+        font-size: 1rem !important;
+        letter-spacing: 0.08em !important;
+    }
+    .geo-logo span {
+        font-size: 0.55em !important;
+    }
+    .geo-status {
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+    .status-pill {
+        font-size: 0.55rem;
+        padding: 2px 7px;
+    }
+    [data-testid="metric-container"] {
+        padding: 0.8rem !important;
+        clip-path: none !important;
+    }
+    [data-testid="metric-container"] [data-testid="stMetricValue"] {
+        font-size: 1.2rem !important;
+    }
+    [data-testid="metric-container"] label {
+        font-size: 0.55rem !important;
+    }
+    .ticker-wrap {
+        font-size: 0.55rem;
+        padding: 4px 10px;
+    }
+    .stTabs [data-baseweb="tab"] {
+        padding: 0.4rem 0.6rem !important;
+        font-size: 0.58rem !important;
+        letter-spacing: 0.06em !important;
+    }
+    .section-title {
+        font-size: 0.9rem;
+    }
+    .section-label {
+        font-size: 0.58rem;
+    }
+    .signal-card {
+        padding: 0.7rem 0.8rem;
+        clip-path: none !important;
+    }
+    .sig-country {
+        font-size: 0.72rem;
+    }
+    .sig-score-big {
+        font-size: 1rem;
+    }
+    .sig-bar-label {
+        font-size: 0.52rem;
+        min-width: 80px;
+    }
+    .alert-card {
+        clip-path: none !important;
+        padding: 0.7rem 0.9rem;
+    }
+    .alert-score {
+        font-size: 1.1rem;
+    }
+    .ai-card {
+        padding: 0.8rem;
+        clip-path: none !important;
+    }
+    .ai-card-country {
+        font-size: 0.8rem;
+    }
+    .intel-table {
+        font-size: 0.65rem;
+    }
+    .intel-table thead th {
+        padding: 0.5rem 0.6rem;
+        font-size: 0.52rem;
+    }
+    .intel-table tbody td {
+        padding: 0.5rem 0.6rem;
+    }
+    .geo-footer {
+        font-size: 0.52rem;
+        margin-top: 2rem;
+        padding: 1rem 0;
+    }
+    .sidebar-logo {
+        font-size: 0.9rem;
+    }
+    .user-msg, .ai-msg {
+        font-size: 0.82rem;
+        padding: 0.6rem 0.8rem;
+    }
+}
+
+/* Small mobile — below 480px */
+@media (max-width: 480px) {
+    .geo-logo {
+        font-size: 0.85rem !important;
+    }
+    [data-testid="metric-container"] [data-testid="stMetricValue"] {
+        font-size: 1rem !important;
+    }
+    .stTabs [data-baseweb="tab"] {
+        padding: 0.3rem 0.4rem !important;
+        font-size: 0.52rem !important;
+        letter-spacing: 0.04em !important;
+    }
+    .sig-bar-label {
+        display: none;
+    }
+    .signal-card {
+        padding: 0.6rem 0.7rem;
+    }
+}
+            /* ── MOBILE TAB SCROLL FIX ── */
+.stTabs [data-baseweb="tab-list"] {
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    flex-wrap: nowrap !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    padding-bottom: 2px !important;
+}
+.stTabs [data-baseweb="tab-list"]::-webkit-scrollbar {
+    display: none !important;
+}
+.stTabs [data-baseweb="tab"] {
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+}
+
+@media (max-width: 768px) {
+    .stTabs [data-baseweb="tab"] {
+        padding: 0.5rem 0.7rem !important;
+        font-size: 0.6rem !important;
+        letter-spacing: 0.05em !important;
+    }
+}
+ </style>
 """, unsafe_allow_html=True)
 
 # =====================================================
@@ -338,6 +526,16 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 render_panel_toggle()
+st.markdown("""
+<script>
+function updateScreenWidth() {
+    var width = window.innerWidth;
+    sessionStorage.setItem('screen_width', width);
+}
+updateScreenWidth();
+window.addEventListener('resize', updateScreenWidth);
+</script>
+""", unsafe_allow_html=True)
 
 if df.empty:
     st.markdown('<div class="geo-warning">⚠ SYSTEM WARNING — No intelligence data loaded.<br>Run the pipeline first: <code>python src/pipeline.py</code></div>', unsafe_allow_html=True)
@@ -387,7 +585,13 @@ filtered_df = df[df["Dynamic_Risk_Level"].isin(selected)] if selected else df
 # METRICS ROW
 # =====================================================
 
-c1, c2, c3, c4 = st.columns(4)
+screen = st.session_state.get("screen_width", 1200)
+is_mobile = screen < 768
+if screen < 768:
+    c1, c2 = st.columns(2)
+    c3, c4 = st.columns(2)
+else:
+    c1, c2, c3, c4 = st.columns(4)
 c1.metric("Countries Monitored", f"{len(filtered_df):,}")
 c2.metric("Critical Alerts",     int((filtered_df["Dynamic_Risk_Level"] == "Critical").sum()))
 c3.metric("Avg GeoRisk Score",   f"{filtered_df['GeoRisk_Live_Score'].mean():.3f}")
@@ -400,9 +604,7 @@ st.markdown("<div style='margin-top:1.5rem'></div>", unsafe_allow_html=True)
 
 layout = create_layout()
 
-with layout[0]:
-
-    tab1, tab2, tab3, tab4, tab5 = st.tabs([
+tab1, tab2, tab3, tab4, tab5 = st.tabs([
     "🌍  GLOBAL OVERVIEW",
     "📡  COUNTRY INTEL",
     "⚡  LIVE SIGNALS",
@@ -413,7 +615,7 @@ with layout[0]:
 # MAIN LAYOUT
 # =====================================================
 
-main_col, side_col = st.columns([4, 1])
+
 
 # =====================================================
 # TAB 1 — GLOBAL OVERVIEW
@@ -503,7 +705,16 @@ with tab3:
                 "Level: <b>%{customdata[1]}</b><extra></extra>"
             ),
         )
-        live_fig.update_layout(**PLOTLY_LAYOUT, height=380,
+        live_fig.update_layout(**PLOTLY_LAYOUT,
+    height=300 if is_mobile else 380,
+    legend=dict(
+        orientation="h" if is_mobile else "v",
+        yanchor="bottom",
+        y=1.02 if is_mobile else 0,
+        xanchor="right",
+        x=1,
+        font=dict(size=9),
+    ),
                                title_font=dict(family="Share Tech Mono", size=11, color="#3a6070"))
         st.plotly_chart(live_fig, use_container_width=True)
 
@@ -515,7 +726,8 @@ with tab3:
             color_discrete_sequence=["#00e5ff"],
         )
         dist_fig.update_traces(marker_line_width=0, opacity=0.8)
-        dist_fig.update_layout(**PLOTLY_LAYOUT, height=380,
+        dist_fig.update_layout(**PLOTLY_LAYOUT,
+        height=250 if is_mobile else 380,
                                title_font=dict(family="Share Tech Mono", size=11, color="#3a6070"))
         st.plotly_chart(dist_fig, use_container_width=True)
 
@@ -523,6 +735,12 @@ with tab3:
     st.markdown("<div style='margin-top:1.5rem'></div>", unsafe_allow_html=True)
     st.markdown('<div class="section-label">News Signal Breakdown</div><div class="section-title">Live Signal Cards — Top Threat Countries</div>', unsafe_allow_html=True)
 
+    screen = st.session_state.get("screen_width", 1200)
+if screen < 768:
+    sig_cols = st.columns(1)
+elif screen < 1024:
+    sig_cols = st.columns(2)
+else:
     sig_cols = st.columns(3)
     top_signals = filtered_df.nlargest(9, "GeoRisk_Live_Score")
 
@@ -778,6 +996,12 @@ with tab4:
     # RESPONSIVE GRID
     # =================================================
 
+    screen = st.session_state.get("screen_width", 1200)
+if screen < 768:
+    cols = st.columns(1)
+elif screen < 1024:
+    cols = st.columns(2)
+else:
     cols = st.columns(3)
 
     # =================================================

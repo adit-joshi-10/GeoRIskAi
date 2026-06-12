@@ -2,449 +2,279 @@ import streamlit as st
 import plotly.express as px
 import plotly.graph_objects as go
 
-# =====================================================
-# GLOBAL TAB
-# =====================================================
 
-def render_global_tab(
+def render_global_tab(filtered_df, PLOTLY_LAYOUT):
 
-    filtered_df,
+    screen = st.session_state.get("screen_width", 1200)
+    is_mobile = screen < 768
 
-    PLOTLY_LAYOUT
-):
-
-    # Mobile Detection
-    mobile = st.session_state.get(
-        "is_mobile",
-        False
-    )
-
-    if mobile:
-        col_map = st.container()
+    # ── LAYOUT ──────────────────────────────────────
+    if is_mobile:
+        col_map    = st.container()
         col_alerts = st.container()
     else:
         col_map, col_alerts = st.columns([2, 1])
 
-    # =================================================
-    # MAP SECTION
-    # =================================================
-
+    # ── MAP ─────────────────────────────────────────
     with col_map:
 
         st.markdown(
-            '''
-            <div class="section-label">
-            Threat Assessment
-            </div>
-
-            <div class="section-title">
-            Global Risk Globe
-            </div>
-            ''',
-            unsafe_allow_html=True
+            '<div class="section-label">Threat Assessment</div>'
+            '<div class="section-title">Global Risk Map</div>',
+            unsafe_allow_html=True,
         )
-
-            # =================================================
-    # MAP SECTION
-    # =================================================
-
-    with col_map:
-
-        st.markdown(
-            '''
-            <div class="section-label">
-            Threat Assessment
-            </div>
-
-            <div class="section-title">
-            Global Risk Globe
-            </div>
-            ''',
-            unsafe_allow_html=True
-        )
-
-        # =============================================
-        # COUNTRY COORDINATES
-        # =============================================
 
         country_coords = {
-
-            "United States": [37.0902, -95.7129],
-            "Russia": [61.5240, 105.3188],
-            "China": [35.8617, 104.1954],
-            "India": [20.5937, 78.9629],
-            "Iran": [32.4279, 53.6880],
-            "Israel": [31.0461, 34.8516],
-            "Ukraine": [48.3794, 31.1656],
-            "Pakistan": [30.3753, 69.3451],
-            "North Korea": [40.3399, 127.5101],
-            "South Korea": [35.9078, 127.7669],
-            "Afghanistan": [33.9391, 67.7100],
-            "Syria": [34.8021, 38.9968],
-            "Venezuela": [6.4238, -66.5897],
-            "Taiwan": [23.6978, 120.9605],
+            "United States": [37.09,  -95.71],
+            "Russia":        [61.52,  105.31],
+            "China":         [35.86,  104.19],
+            "India":         [20.59,   78.96],
+            "Iran":          [32.42,   53.68],
+            "Israel":        [31.04,   34.85],
+            "Ukraine":       [48.37,   31.16],
+            "Pakistan":      [30.37,   69.34],
+            "North Korea":   [40.33,  127.51],
+            "South Korea":   [35.90,  127.76],
+            "Afghanistan":   [33.93,   67.71],
+            "Syria":         [34.80,   38.99],
+            "Venezuela":     [ 6.42,  -66.58],
+            "Taiwan":        [23.69,  120.96],
         }
 
-        filtered_df["Latitude"] = filtered_df[
-            "Country"
-        ].map(
-            lambda x:
-            country_coords.get(x, [0,0])[0]
-        )
+        filtered_df = filtered_df.copy()
+        filtered_df["Latitude"]  = filtered_df["Country"].map(lambda x: country_coords.get(x, [0, 0])[0])
+        filtered_df["Longitude"] = filtered_df["Country"].map(lambda x: country_coords.get(x, [0, 0])[1])
 
-        filtered_df["Longitude"] = filtered_df[
-            "Country"
-        ].map(
-            lambda x:
-            country_coords.get(x, [0,0])[1]
-        )
-
-        # =============================================
-        # HOVER TEMPLATE
-        # =============================================
-
-        hover_template = (
-
-            "<b style='font-size:13px'>"
-            "%{customdata[0]}"
-            "</b><br>"
-
-            "<span style='color:#3a6070'>"
-            "━━━━━━━━━━━━━━━━━━"
-            "</span><br>"
-
-            "GeoRisk Score &nbsp; "
-            "<b style='color:#00e5ff'>"
-            "%{marker.color:.4f}"
-            "</b><br>"
-
-            "Risk Level &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "
-            "<b>%{customdata[1]}</b><br>"
-
-            "Conflict Prob &nbsp; "
-            "<b style='color:#ff9500'>"
-            "%{customdata[2]:.4f}"
-            "</b><br>"
-
-            "News Risk &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "
-            "<b style='color:#ff3b5c'>"
-            "%{customdata[3]:.4f}"
-            "</b><br>"
-
-            "<extra></extra>"
-        )
-
-        # =============================================
-        # INTERACTIVE 3D GLOBE
-        # =============================================
-
-        map_fig = go.Figure()
-
-        map_fig.add_trace(
-
-            go.Scattergeo(
-
+        # On mobile use flat map instead of globe
+        if is_mobile:
+            map_fig = go.Figure()
+            map_fig.add_trace(go.Scattergeo(
                 lon=filtered_df["Longitude"],
-
                 lat=filtered_df["Latitude"],
-
                 text=filtered_df["Country"],
-
-                customdata=filtered_df[
-                    [
-                        "Country",
-                        "Dynamic_Risk_Level",
-                        "Conflict_Probability",
-                        "News_Risk_Score"
-                    ]
-                ].values,
-
-                hovertemplate=hover_template,
-
-                mode="markers",
-
+                customdata=filtered_df[["Country","Dynamic_Risk_Level","Conflict_Probability","News_Risk_Score"]].values,
+                hovertemplate=(
+                    "<b>%{customdata[0]}</b><br>"
+                    "GeoRisk: <b>%{marker.color:.3f}</b><br>"
+                    "Level: <b>%{customdata[1]}</b><br>"
+                    "<extra></extra>"
+                ),
+                mode="markers+text",
+                textposition="top center",
+                textfont=dict(size=8, color="#c8dde8"),
                 marker=dict(
-
-                    size=(
-                        filtered_df[
-                            "GeoRisk_Live_Score"
-                        ] * 35
-                    ),
-
-                    color=filtered_df[
-                        "GeoRisk_Live_Score"
-                    ],
-
+                    size=filtered_df["GeoRisk_Live_Score"] * 20 + 6,
+                    color=filtered_df["GeoRisk_Live_Score"],
                     colorscale=[
-
                         [0.00, "#00e5ff"],
-
-                        [0.35, "#00ffaa"],
-
-                        [0.60, "#ffaa00"],
-
-                        [0.80, "#ff5c00"],
-
+                        [0.40, "#00ffaa"],
+                        [0.65, "#ffaa00"],
+                        [0.85, "#ff5c00"],
                         [1.00, "#ff1a3c"],
                     ],
-
-                    opacity=0.95,
-
-                    line=dict(
-                        width=1.2,
-                        color="#ffffff"
+                    opacity=0.9,
+                    line=dict(width=1, color="#ffffff"),
+                    colorbar=dict(
+                        title="Risk",
+                        thickness=8,
+                        len=0.5,
+                        titlefont=dict(size=9, color="#7a9db0"),
+                        tickfont=dict(size=8, color="#7a9db0"),
                     ),
                 ),
-            )
-        )
-
-        # =============================================
-        # GLOBE LAYOUT
-        # =============================================
-
-        map_fig.update_layout(
-
-            height=720,
-
-            margin=dict(
-                l=0,
-                r=0,
-                t=0,
-                b=0
-            ),
-
-            paper_bgcolor="#020609",
-
-            geo=dict(
-
-                projection_type="orthographic",
-
-                bgcolor="#020609",
-
-                showocean=True,
-                oceancolor="#020d18",
-
-                showland=True,
-                landcolor="#071420",
-
-                showlakes=True,
-                lakecolor="#020d18",
-
-                showcountries=True,
-                countrycolor="#16354d",
-
-                showcoastlines=True,
-                coastlinecolor="#16354d",
-
-                showframe=False,
-
-                lataxis=dict(
-                    showgrid=False
+            ))
+            map_fig.update_layout(
+                height=320,
+                margin=dict(l=0, r=0, t=0, b=0),
+                paper_bgcolor="#020609",
+                geo=dict(
+                    projection_type="natural earth",
+                    bgcolor="#020609",
+                    showocean=True,    oceancolor="#020d18",
+                    showland=True,     landcolor="#071420",
+                    showlakes=True,    lakecolor="#020d18",
+                    showcountries=True, countrycolor="#16354d",
+                    showcoastlines=True, coastlinecolor="#16354d",
+                    showframe=False,
+                    lataxis=dict(showgrid=False),
+                    lonaxis=dict(showgrid=False),
+                    # Center on Middle East / conflict zone
+                    center=dict(lon=50, lat=25),
+                    projection_scale=1.2,
                 ),
-
-                lonaxis=dict(
-                    showgrid=False
-                ),
-
-                projection_rotation=dict(
-
-                    lon=20,
-                    lat=10,
-                    roll=0
-                )
             )
-        )
 
-        st.plotly_chart(
-            map_fig,
-            use_container_width=True
-        )
-                # =============================================
-        # TOP THREATS CHART
-        # =============================================
+        else:
+            # Desktop — keep the globe
+            map_fig = go.Figure()
+            map_fig.add_trace(go.Scattergeo(
+                lon=filtered_df["Longitude"],
+                lat=filtered_df["Latitude"],
+                text=filtered_df["Country"],
+                customdata=filtered_df[["Country","Dynamic_Risk_Level","Conflict_Probability","News_Risk_Score"]].values,
+                hovertemplate=(
+                    "<b>%{customdata[0]}</b><br>"
+                    "GeoRisk: <b style='color:#00e5ff'>%{marker.color:.4f}</b><br>"
+                    "Level: <b>%{customdata[1]}</b><br>"
+                    "Conflict Prob: <b style='color:#ff9500'>%{customdata[2]:.4f}</b><br>"
+                    "News Risk: <b style='color:#ff3b5c'>%{customdata[3]:.4f}</b><br>"
+                    "<extra></extra>"
+                ),
+                mode="markers",
+                marker=dict(
+                    size=filtered_df["GeoRisk_Live_Score"] * 35,
+                    color=filtered_df["GeoRisk_Live_Score"],
+                    colorscale=[
+                        [0.00, "#00e5ff"],
+                        [0.35, "#00ffaa"],
+                        [0.60, "#ffaa00"],
+                        [0.80, "#ff5c00"],
+                        [1.00, "#ff1a3c"],
+                    ],
+                    opacity=0.95,
+                    line=dict(width=1.2, color="#ffffff"),
+                ),
+            ))
+            map_fig.update_layout(
+                height=580,
+                margin=dict(l=0, r=0, t=0, b=0),
+                paper_bgcolor="#020609",
+                geo=dict(
+                    projection_type="orthographic",
+                    bgcolor="#020609",
+                    showocean=True,    oceancolor="#020d18",
+                    showland=True,     landcolor="#071420",
+                    showlakes=True,    lakecolor="#020d18",
+                    showcountries=True, countrycolor="#16354d",
+                    showcoastlines=True, coastlinecolor="#16354d",
+                    showframe=False,
+                    lataxis=dict(showgrid=False),
+                    lonaxis=dict(showgrid=False),
+                    projection_rotation=dict(lon=40, lat=20, roll=0),
+                ),
+            )
 
+        st.plotly_chart(map_fig, use_container_width=True)
+
+        # ── TOP THREATS BAR CHART ────────────────────
         st.markdown(
-            '''
-            <div class="section-label">
-            Top Threats
-            </div>
-
-            <div class="section-title">
-            Highest Risk Countries
-            </div>
-            ''',
-            unsafe_allow_html=True
+            '<div class="section-label">Top Threats</div>'
+            '<div class="section-title">Highest Risk Countries</div>',
+            unsafe_allow_html=True,
         )
 
-        top10 = filtered_df.nlargest(
-            10,
-            "GeoRisk_Live_Score"
-        )
+        top_n  = 7 if is_mobile else 10
+        top10  = filtered_df.nlargest(top_n, "GeoRisk_Live_Score")
 
-        bar_fig = px.bar(
+        if is_mobile:
+            # Horizontal bar on mobile — much more readable
+            bar_fig = px.bar(
+                top10.sort_values("GeoRisk_Live_Score"),
+                x="GeoRisk_Live_Score",
+                y="Country",
+                orientation="h",
+                color="Dynamic_Risk_Level",
+                color_discrete_map={
+                    "Critical": "#ff3b5c",
+                    "High":     "#ff9500",
+                    "Medium":   "#ffe600",
+                    "Low":      "#00ff88",
+                },
+                text="GeoRisk_Live_Score",
+            )
+            bar_fig.update_traces(
+                texttemplate="%{x:.2f}",
+                textposition="outside",
+                textfont=dict(size=9, color="#c8dde8"),
+            )
+            bar_fig.update_layout(
+                **PLOTLY_LAYOUT,
+                height=280,
+                margin=dict(l=0, r=40, t=20, b=0),
+                showlegend=False,
+                xaxis=dict(showticklabels=False, title=""),
+                yaxis=dict(
+                    title="",
+                    tickfont=dict(size=10, color="#c8dde8"),
+                ),
+            )
+        else:
+            bar_fig = px.bar(
+                top10,
+                x="Country",
+                y="GeoRisk_Live_Score",
+                color="Dynamic_Risk_Level",
+                color_discrete_map={
+                    "Critical": "#ff3b5c",
+                    "High":     "#ff9500",
+                    "Medium":   "#ffe600",
+                    "Low":      "#00ff88",
+                },
+                text="GeoRisk_Live_Score",
+            )
+            bar_fig.update_traces(
+                texttemplate="%{y:.3f}",
+                textposition="outside",
+                textfont=dict(size=9),
+            )
+            bar_fig.update_layout(
+                **PLOTLY_LAYOUT,
+                height=320,
+                bargap=0.35,
+            )
 
-            top10,
+        st.plotly_chart(bar_fig, use_container_width=True)
 
-            x="Country",
-
-            y="GeoRisk_Live_Score",
-
-            color="Dynamic_Risk_Level",
-
-            color_discrete_map={
-
-                "Critical":"#ff3b5c",
-
-                "High":"#ff9500",
-
-                "Medium":"#ffe600",
-
-                "Low":"#00ff88"
-            },
-
-            text="GeoRisk_Live_Score",
-        )
-
-        bar_fig.update_layout(
-
-            **PLOTLY_LAYOUT,
-
-            height=320,
-
-            bargap=0.35
-        )
-
-        st.plotly_chart(
-
-            bar_fig,
-
-            use_container_width=True
-        )
-            # =================================================
-    # ALERTS PANEL
-    # =================================================
-
+    # ── ALERTS PANEL ────────────────────────────────
     with col_alerts:
 
         st.markdown(
-            '''
-            <div class="section-label">
-            Intelligence Feed
-            </div>
-
-            <div class="section-title">
-            Strategic Alerts
-            </div>
-            ''',
-            unsafe_allow_html=True
+            '<div class="section-label">Intelligence Feed</div>'
+            '<div class="section-title">Strategic Alerts</div>',
+            unsafe_allow_html=True,
         )
 
-        top_alerts = filtered_df.nlargest(
-            6,
-            "GeoRisk_Live_Score"
-        )
+        top_n_alerts = 4 if is_mobile else 6
+        top_alerts   = filtered_df.nlargest(top_n_alerts, "GeoRisk_Live_Score")
 
         for _, row in top_alerts.iterrows():
-
             country = row["Country"]
-
-            score = row[
-                "GeoRisk_Live_Score"
-            ]
-
-            risk = row[
-                "Dynamic_Risk_Level"
-            ]
-
-            news = row[
-                "News_Risk_Score"
-            ]
+            score   = row["GeoRisk_Live_Score"]
+            risk    = row["Dynamic_Risk_Level"]
+            news    = row["News_Risk_Score"]
 
             if risk == "Critical":
-
-                color = "#ff3b5c"
-
-                icon = "🔴"
-
+                color, icon = "#ff3b5c", "🔴"
             elif risk == "High":
-
-                color = "#ff9500"
-
-                icon = "🟠"
-
+                color, icon = "#ff9500", "🟠"
             elif risk == "Medium":
-
-                color = "#ffe600"
-
-                icon = "🟡"
-
+                color, icon = "#ffe600", "🟡"
             else:
+                color, icon = "#00ff88", "🟢"
 
-                color = "#00ff88"
-
-                icon = "🟢"
-
-            st.markdown(
-
-                f"""
+            st.markdown(f"""
 <div style="
 background:rgba(5,15,25,0.95);
 border:1px solid {color};
-border-radius:14px;
-padding:14px;
-margin-bottom:12px;
-box-shadow:0 0 18px rgba(0,0,0,0.35);
+border-radius:12px;
+padding:12px 14px;
+margin-bottom:10px;
 ">
-
-<div style="
-font-size:0.75rem;
-color:{color};
+<div style="font-size:0.7rem;color:{color};
 font-family:'Share Tech Mono',monospace;
-letter-spacing:0.08em;
-margin-bottom:6px;
-">
-
+letter-spacing:0.08em;margin-bottom:5px;">
 {icon} {risk.upper()} ALERT
-
 </div>
-
-<div style="
-font-size:1rem;
-font-weight:700;
-color:white;
-margin-bottom:8px;
-">
-
+<div style="font-size:0.95rem;font-weight:700;
+color:white;margin-bottom:7px;">
 {country}
-
 </div>
-
-<div style="
-display:flex;
-justify-content:space-between;
-font-size:0.8rem;
-color:#9db4c0;
-">
-
-<span>
-GeoRisk: <b>{score:.2f}</b>
-</span>
-
-<span>
-News: <b>{news:.2f}</b>
-</span>
-
+<div style="display:flex;justify-content:space-between;
+font-size:0.75rem;color:#9db4c0;">
+<span>GeoRisk: <b>{score:.2f}</b></span>
+<span>News: <b>{news:.2f}</b></span>
 </div>
-
-</div>
-                """,
-
-                unsafe_allow_html=True
-            )
+</div>""", unsafe_allow_html=True)
 
         st.markdown("---")
-
-        st.caption(
-            "Live geopolitical intelligence "
-            "monitoring active."
-        )
+        st.caption("Live geopolitical intelligence monitoring active.")
