@@ -158,14 +158,17 @@ def fetch_country_news(country, limit=5):
 
             if len(articles) >= limit:
                 break
-
+         
         return articles
 
     except Exception as e:
         print(f"GDELT fetch failed for {country}: {e}")
         return []
 
+def fetch_country_news(country, limit=5):
 
+    print("\n" + "="*50)
+    print(f"FETCHING NEWS FOR: {country}")
 # =====================================================
 # FETCH NEWS FOR PIPELINE
 # =====================================================
@@ -204,6 +207,7 @@ def fetch_news(country):
 
         data = response.json()
         raw_articles = data.get("articles", [])
+        print(f"GDELT returned {len(raw_articles)} raw articles")
 
         filtered = []
         for a in raw_articles:
