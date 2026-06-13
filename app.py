@@ -6,6 +6,7 @@ import plotly.graph_objects as go
 import os
 import time
 import streamlit as st
+from streamlit_option_menu import option_menu
 
 if "mobile_mode" not in st.session_state:
     st.session_state.mobile_mode = False
@@ -66,6 +67,105 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
+st.markdown("""
+<style>
+
+/* ===== TAB CONTAINER ===== */
+
+.stTabs [data-baseweb="tab-list"] {
+
+    gap: 10px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-bottom: 10px;
+}
+
+.stTabs [data-baseweb="tab-list"]::-webkit-scrollbar {
+
+    display: none;
+}
+
+/* ===== INDIVIDUAL TAB ===== */
+
+.stTabs [data-baseweb="tab"] {
+
+    height: 55px;
+
+    white-space: nowrap;
+
+    border-radius: 15px;
+
+    background:
+        rgba(0, 15, 30, 0.85);
+
+    border:
+        1px solid rgba(0,255,255,0.15);
+
+    color:
+        #d7f7ff;
+
+    font-weight:
+        600;
+
+    padding:
+        12px 20px;
+
+    transition:
+        all 0.3s ease;
+}
+
+/* ===== HOVER EFFECT ===== */
+
+.stTabs [data-baseweb="tab"]:hover {
+
+    border:
+        1px solid rgba(0,255,255,0.5);
+
+    box-shadow:
+        0 0 15px rgba(0,255,255,0.25);
+
+    transform:
+        translateY(-2px);
+}
+
+/* ===== ACTIVE TAB ===== */
+
+.stTabs [aria-selected="true"] {
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0,80,120,0.95),
+            rgba(0,140,180,0.95)
+        ) !important;
+
+    color:
+        white !important;
+
+    border:
+        1px solid rgba(0,255,255,0.8);
+
+    box-shadow:
+        0 0 20px rgba(0,255,255,0.35);
+}
+
+/* ===== MOBILE ===== */
+
+@media (max-width: 768px) {
+
+    .stTabs [data-baseweb="tab"] {
+
+        min-width: 170px;
+
+        font-size: 12px;
+
+        padding: 10px 16px;
+    }
+
+}
+
+</style>
+""", unsafe_allow_html=True)
 initialize_layout()
 
 # =====================================================
@@ -526,6 +626,9 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 render_panel_toggle()
+if st.session_state.get("intel_panel_open", False):
+    render_intelligence_core(df)
+    st.stop()
 st.markdown("""
 <script>
 function updateScreenWidth() {
@@ -602,85 +705,316 @@ st.markdown("<div style='margin-top:1.5rem'></div>", unsafe_allow_html=True)
 # TABS
 # =====================================================
 
-layout = create_layout()
-
-tab1, tab2, tab3, tab4, tab5 = st.tabs([
-    "🌍  GLOBAL OVERVIEW",
-    "📡  COUNTRY INTEL",
-    "⚡  LIVE SIGNALS",
-    "💹  INVESTOR BRIEF",
-    "🤖  AI ANALYST",
-])
 # =====================================================
-# MAIN LAYOUT
+# COMMAND CENTER NAVIGATION
 # =====================================================
 
+st.markdown("""
+<style>
 
+/* ── NAV CONTAINER ── */
+.nav-container {
+    background: linear-gradient(180deg, #040d14 0%, #020609 100%);
+    border: 1px solid #0a2a40;
+    border-radius: 12px;
+    padding: 6px 8px;
+    margin-bottom: 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
 
-# =====================================================
-# TAB 1 — GLOBAL OVERVIEW
-# =====================================================
+.nav-container::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        #00e5ff 30%,
+        #00e5ff 70%,
+        transparent 100%
+    );
+    animation: scanH 4s ease-in-out infinite;
+}
 
-with tab1:
+/* ── NAV ITEMS ── */
+.nav-link {
+    font-family: 'Share Tech Mono', monospace !important;
+    font-size: 0.7rem !important;
+    letter-spacing: 0.12em !important;
+    text-transform: uppercase !important;
+    color: #3a6070 !important;
+    background: transparent !important;
+    border: 1px solid transparent !important;
+    border-radius: 8px !important;
+    padding: 10px 16px !important;
+    transition: all 0.25s ease !important;
+    white-space: nowrap !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+}
 
-    render_global_tab(
-        filtered_df,
-        PLOTLY_LAYOUT
+.nav-link:hover {
+    color: #00e5ff !important;
+    border-color: rgba(0,229,255,0.2) !important;
+    background: rgba(0,229,255,0.05) !important;
+    text-shadow: 0 0 8px rgba(0,229,255,0.4) !important;
+}
+
+.nav-link-selected {
+    font-family: 'Share Tech Mono', monospace !important;
+    font-size: 0.7rem !important;
+    letter-spacing: 0.12em !important;
+    text-transform: uppercase !important;
+    color: #00e5ff !important;
+    background: linear-gradient(135deg,
+        rgba(0,80,120,0.9),
+        rgba(0,40,70,0.9)
+    ) !important;
+    border: 1px solid rgba(0,229,255,0.4) !important;
+    border-radius: 8px !important;
+    padding: 10px 16px !important;
+    box-shadow:
+        0 0 15px rgba(0,229,255,0.15),
+        inset 0 1px 0 rgba(0,229,255,0.1) !important;
+    text-shadow: 0 0 10px rgba(0,229,255,0.6) !important;
+    white-space: nowrap !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+}
+
+/* ── ICON ── */
+.nav-link i, .nav-link-selected i {
+    font-size: 1rem !important;
+}
+
+/* ── MENU CONTAINER ── */
+#MainMenu { visibility: hidden; }
+.css-1rs6os { overflow-x: auto; }
+
+/* ── MOBILE NAV ── */
+@media (max-width: 768px) {
+    .nav-container {
+        padding: 4px 4px;
+        border-radius: 8px;
+    }
+    .nav-link, .nav-link-selected {
+        font-size: 0.58rem !important;
+        padding: 8px 10px !important;
+        letter-spacing: 0.06em !important;
+    }
+    /* Hide text on very small screens, show only icons */
+    @media (max-width: 420px) {
+        .nav-link span:last-child,
+        .nav-link-selected span:last-child {
+            display: none !important;
+        }
+        .nav-link, .nav-link-selected {
+            padding: 10px 12px !important;
+            justify-content: center !important;
+        }
+    }
+}
+
+/* ── STATUS BAR ABOVE NAV ── */
+.nav-status-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 8px;
+    margin-bottom: 6px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.12em;
+    color: #1a3a50;
+    text-transform: uppercase;
+}
+
+.nav-status-dot {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #00ff88;
+    box-shadow: 0 0 6px rgba(0,255,136,0.6);
+    animation: pulse-dot 2s ease-in-out infinite;
+    margin-right: 5px;
+}
+
+@keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+/* ── CORNER DECORATION ── */
+.nav-corner {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-color: #00e5ff;
+    border-style: solid;
+    opacity: 0.4;
+}
+.nav-corner-tl { top: 4px; left: 4px; border-width: 1px 0 0 1px; }
+.nav-corner-tr { top: 4px; right: 4px; border-width: 1px 1px 0 0; }
+.nav-corner-bl { bottom: 4px; left: 4px; border-width: 0 0 1px 1px; }
+.nav-corner-br { bottom: 4px; right: 4px; border-width: 0 1px 1px 0; }
+</style>
+""", unsafe_allow_html=True)
+
+# Status bar above nav
+st.markdown(f"""
+<div class="nav-status-bar">
+    <span><span class="nav-status-dot"></span>GEORISKAI COMMAND CENTER — INTELLIGENCE ACTIVE</span>
+    <span>NODES: {len(filtered_df)} MONITORED</span>
+</div>
+""", unsafe_allow_html=True)
+
+# Navigation
+with st.container():
+    selected_tab = option_menu(
+        menu_title=None,
+        options=[
+            "Global Overview",
+            "Country Intel",
+            "Live Signals",
+            "Investor Brief",
+            "AI Analyst",
+        ],
+        icons=[
+            "globe",
+            "broadcast",
+            "lightning-charge",
+            "graph-up-arrow",
+            "robot",
+        ],
+        default_index=0,
+        orientation="horizontal",
+        styles={
+            "container": {
+                "padding":          "0",
+                "background-color": "transparent",
+                "border":           "none",
+                "gap":              "4px",
+            },
+            "icon": {
+                "color":     "#3a6070",
+                "font-size": "14px",
+            },
+            "nav-link": {
+                "font-family":    "'Share Tech Mono', monospace",
+                "font-size":      "0.68rem",
+                "letter-spacing": "0.1em",
+                "text-transform": "uppercase",
+                "color":          "#3a6070",
+                "background":     "transparent",
+                "border":         "1px solid transparent",
+                "border-radius":  "8px",
+                "padding":        "10px 14px",
+                "transition":     "all 0.2s",
+                "white-space":    "nowrap",
+            },
+            "nav-link-selected": {
+                "font-family":    "'Share Tech Mono', monospace",
+                "font-size":      "0.68rem",
+                "letter-spacing": "0.1em",
+                "text-transform": "uppercase",
+                "color":          "#00e5ff",
+                "background":     "linear-gradient(135deg, rgba(0,80,120,0.9), rgba(0,40,70,0.9))",
+                "border":         "1px solid rgba(0,229,255,0.4)",
+                "border-radius":  "8px",
+                "box-shadow":     "0 0 15px rgba(0,229,255,0.15)",
+                "text-shadow":    "0 0 8px rgba(0,229,255,0.5)",
+            },
+        },
+        key="main_nav",
     )
+
 # =====================================================
-# TAB 2 — COUNTRY INTEL
+# RENDER SELECTED TAB
 # =====================================================
 
-with tab2:
-    st.markdown('<div class="section-label">Deep Analysis</div><div class="section-title">Country Intelligence Profile</div>', unsafe_allow_html=True)
+if selected_tab == "Global Overview":
+    render_global_tab(filtered_df, PLOTLY_LAYOUT)
 
+elif selected_tab == "Country Intel":
+    st.markdown(
+        '<div class="section-label">Deep Analysis</div>'
+        '<div class="section-title">Country Intelligence Profile</div>',
+        unsafe_allow_html=True,
+    )
     if not history_df.empty:
-        countries = sorted(history_df["Country"].dropna().unique())
-        col_sel, col_info = st.columns([1, 3])
-        with col_sel:
-            country = st.selectbox("SELECT COUNTRY", countries, label_visibility="visible")
+        countries  = sorted(history_df["Country"].dropna().unique())
+        screen     = st.session_state.get("screen_width", 1200)
+        if screen < 768:
+            country = st.selectbox("SELECT COUNTRY", countries)
+            col_info  = st.container()
+            col_spark = st.container()
+        else:
+            col_sel, col_info_outer = st.columns([1, 3])
+            with col_sel:
+                country = st.selectbox("SELECT COUNTRY", countries)
+            col_info  = col_info_outer
+            col_spark = None
 
         country_df = history_df[history_df["Country"] == country]
 
         if "Year" in country_df.columns and "Conflict_Probability" in country_df.columns:
-            col_info, col_spark = st.columns([3, 1])
+            trend_fig = px.area(
+                country_df, x="Year", y="Conflict_Probability",
+                title=f"CONFLICT PROBABILITY TREND — {country.upper()}",
+                markers=True,
+            )
+            trend_fig.update_traces(
+                line_color="#00e5ff",
+                fillcolor="rgba(0,229,255,0.08)",
+                marker=dict(size=5, color="#00e5ff"),
+            )
+            trend_fig.update_layout(
+                **PLOTLY_LAYOUT,
+                height=320,
+                title_font=dict(family="Share Tech Mono", size=11, color="#3a6070"),
+            )
+            st.plotly_chart(trend_fig, use_container_width=True)
 
-            with col_info:
-                trend_fig = px.area(
-                    country_df, x="Year", y="Conflict_Probability",
-                    title=f"CONFLICT PROBABILITY TREND — {country.upper()}",
-                    markers=True,
-                )
-                trend_fig.update_traces(
-                    line_color="#00e5ff",
-                    fillcolor="rgba(0,229,255,0.08)",
-                    marker=dict(size=5, color="#00e5ff"),
-                )
-                trend_fig.update_layout(**PLOTLY_LAYOUT, height=320,
-                                        title_font=dict(family="Share Tech Mono", size=11, color="#3a6070"))
-                st.plotly_chart(trend_fig, use_container_width=True)
-
-            with col_spark:
-                latest = country_df.sort_values("Year").iloc[-1] if not country_df.empty else None
-                if latest is not None:
-                    prob = latest.get("Conflict_Probability",0)
-                    st.markdown(f"""
-                    <div style="background:#040d14;border:1px solid #0a2a40;padding:1.2rem;margin-top:.5rem">
-                      <div style="font-family:'Share Tech Mono',monospace;font-size:.6rem;letter-spacing:.2em;color:#3a6070;text-transform:uppercase;margin-bottom:.5rem">LATEST READING</div>
-                      <div style="font-family:'Orbitron',monospace;font-size:2rem;font-weight:700;color:#00e5ff;text-shadow:0 0 15px rgba(0,229,255,.4)">{prob:.3f}</div>
-                      <div style="font-family:'Share Tech Mono',monospace;font-size:.65rem;color:#7a9db0;margin-top:.3rem">CONFLICT PROBABILITY</div>
-                    </div>""", unsafe_allow_html=True)
+            latest = country_df.sort_values("Year").iloc[-1] if not country_df.empty else None
+            if latest is not None:
+                prob = latest.get("Conflict_Probability", 0)
+                st.markdown(f"""
+<div style="background:#040d14;border:1px solid #0a2a40;
+            padding:1.2rem;margin-top:.5rem;border-radius:8px;
+            display:inline-block;min-width:160px;">
+  <div style="font-family:'Share Tech Mono',monospace;font-size:.6rem;
+              letter-spacing:.2em;color:#3a6070;text-transform:uppercase;
+              margin-bottom:.5rem">LATEST READING</div>
+  <div style="font-family:'Orbitron',monospace;font-size:2rem;
+              font-weight:700;color:#00e5ff;
+              text-shadow:0 0 15px rgba(0,229,255,.4)">{prob:.3f}</div>
+  <div style="font-family:'Share Tech Mono',monospace;font-size:.65rem;
+              color:#7a9db0;margin-top:.3rem">CONFLICT PROBABILITY</div>
+</div>""", unsafe_allow_html=True)
     else:
-        st.markdown('<div class="geo-warning">⚠ No historical prediction data found. Run pipeline.py first.</div>', unsafe_allow_html=True)
+        st.markdown(
+            '<div class="geo-warning">⚠ No historical data. Run pipeline.py first.</div>',
+            unsafe_allow_html=True,
+        )
 
-# =====================================================
-# TAB 3 — LIVE SIGNALS  (UPGRADED)
-# =====================================================
+elif selected_tab == "Live Signals":
+    st.markdown(
+        '<div class="section-label">Real-Time Intelligence</div>'
+        '<div class="section-title">Signal Analysis Matrix</div>',
+        unsafe_allow_html=True,
+    )
+    screen    = st.session_state.get("screen_width", 1200)
+    is_mobile = screen < 768
 
-with tab3:
-    st.markdown('<div class="section-label">Real-Time Intelligence</div><div class="section-title">Signal Analysis Matrix</div>', unsafe_allow_html=True)
-
-    col_scatter, col_dist = st.columns([3, 2])
+    if is_mobile:
+        col_scatter = st.container()
+        col_dist    = st.container()
+    else:
+        col_scatter, col_dist = st.columns([3, 2])
 
     with col_scatter:
         live_fig = px.scatter(
@@ -690,32 +1024,39 @@ with tab3:
             size="GeoRisk_Live_Score",
             color="Dynamic_Risk_Level",
             hover_name="Country",
-            color_discrete_map={"Critical":"#ff3b5c","High":"#ff9500","Medium":"#ffe600","Low":"#00ff88"},
+            color_discrete_map={
+                "Critical": "#ff3b5c",
+                "High":     "#ff9500",
+                "Medium":   "#ffe600",
+                "Low":      "#00ff88",
+            },
             title="ML PROBABILITY vs NEWS RISK SIGNAL",
             size_max=28,
-            custom_data=["GeoRisk_Live_Score","Dynamic_Risk_Level"],
+            custom_data=["GeoRisk_Live_Score", "Dynamic_Risk_Level"],
         )
         live_fig.update_traces(
             marker=dict(line=dict(width=0.5, color="#0a2a40")),
             hovertemplate=(
                 "<b>%{hovertext}</b><br>"
-                "Conflict Prob: <b style='color:#ff9500'>%{x:.4f}</b><br>"
-                "News Risk: <b style='color:#ff3b5c'>%{y:.4f}</b><br>"
-                "GeoRisk Score: <b style='color:#00e5ff'>%{customdata[0]:.4f}</b><br>"
+                "Conflict Prob: <b>%{x:.4f}</b><br>"
+                "News Risk: <b>%{y:.4f}</b><br>"
+                "GeoRisk: <b>%{customdata[0]:.4f}</b><br>"
                 "Level: <b>%{customdata[1]}</b><extra></extra>"
             ),
         )
-        live_fig.update_layout(**PLOTLY_LAYOUT,
-    height=300 if is_mobile else 380,
-    legend=dict(
-        orientation="h" if is_mobile else "v",
-        yanchor="bottom",
-        y=1.02 if is_mobile else 0,
-        xanchor="right",
-        x=1,
-        font=dict(size=9),
-    ),
-                               title_font=dict(family="Share Tech Mono", size=11, color="#3a6070"))
+        live_fig.update_layout(
+            **PLOTLY_LAYOUT,
+            height=300 if is_mobile else 380,
+            legend=dict(
+                orientation="h" if is_mobile else "v",
+                yanchor="bottom",
+                y=1.02 if is_mobile else 0,
+                xanchor="right",
+                x=1,
+                font=dict(size=9),
+            ),
+            title_font=dict(family="Share Tech Mono", size=11, color="#3a6070"),
+        )
         st.plotly_chart(live_fig, use_container_width=True)
 
     with col_dist:
@@ -726,425 +1067,180 @@ with tab3:
             color_discrete_sequence=["#00e5ff"],
         )
         dist_fig.update_traces(marker_line_width=0, opacity=0.8)
-        dist_fig.update_layout(**PLOTLY_LAYOUT,
-        height=250 if is_mobile else 380,
-                               title_font=dict(family="Share Tech Mono", size=11, color="#3a6070"))
+        dist_fig.update_layout(
+            **PLOTLY_LAYOUT,
+            height=250 if is_mobile else 380,
+            title_font=dict(family="Share Tech Mono", size=11, color="#3a6070"),
+        )
         st.plotly_chart(dist_fig, use_container_width=True)
 
-    # ── NEWS SCORE BREAKDOWN SECTION ─────────────────────────────────
     st.markdown("<div style='margin-top:1.5rem'></div>", unsafe_allow_html=True)
-    st.markdown('<div class="section-label">News Signal Breakdown</div><div class="section-title">Live Signal Cards — Top Threat Countries</div>', unsafe_allow_html=True)
+    st.markdown(
+        '<div class="section-label">News Signal Breakdown</div>'
+        '<div class="section-title">Live Signal Cards — Top Threat Countries</div>',
+        unsafe_allow_html=True,
+    )
 
-    screen = st.session_state.get("screen_width", 1200)
-if screen < 768:
-    sig_cols = st.columns(1)
-elif screen < 1024:
-    sig_cols = st.columns(2)
-else:
-    sig_cols = st.columns(3)
-    top_signals = filtered_df.nlargest(9, "GeoRisk_Live_Score")
+    if is_mobile:
+        sig_cols = st.columns(1)
+    elif screen < 1024:
+        sig_cols = st.columns(2)
+    else:
+        sig_cols = st.columns(3)
 
-    sig_level_css = {"Critical":"crit","High":"high","Medium":"med","Low":"low-s"}
+    top_signals    = filtered_df.nlargest(9, "GeoRisk_Live_Score")
+    sig_level_css  = {"Critical":"crit","High":"high","Medium":"med","Low":"low-s"}
     sig_news_color = {"Critical":"#ff3b5c","High":"#ff9500","Medium":"#ffe600","Low":"#00ff88"}
 
     for i, (_, row) in enumerate(top_signals.iterrows()):
-        lvl    = row.get("Dynamic_Risk_Level","Low")
-        score  = row.get("GeoRisk_Live_Score",0)
-        cprob  = row.get("Conflict_Probability",0)
-        news   = row.get("News_Risk_Score",0)
-        cntry  = row.get("Country","Unknown")
-        sc_css = sig_level_css.get(lvl,"low-s")
-        nc     = sig_news_color.get(lvl,"#00ff88")
-
-        # Derive signal breakdown heuristics
+        lvl    = row.get("Dynamic_Risk_Level", "Low")
+        score  = row.get("GeoRisk_Live_Score", 0)
+        cprob  = row.get("Conflict_Probability", 0)
+        news   = row.get("News_Risk_Score", 0)
+        cntry  = row.get("Country", "Unknown")
+        sc_css = sig_level_css.get(lvl, "low-s")
+        nc     = sig_news_color.get(lvl, "#00ff88")
         ml_pct   = int(cprob * 100)
         news_pct = int(news * 100)
         geo_pct  = int(score * 100)
 
-        # News intensity label
-        if news >= 0.7:   news_label, news_bc = "HIGH INTENSITY", f"color:{nc};background:rgba(255,59,92,.12);border:1px solid {nc}"
-        elif news >= 0.4: news_label, news_bc = "MODERATE",       f"color:#ff9500;background:rgba(255,149,0,.12);border:1px solid #ff9500"
-        else:             news_label, news_bc = "LOW",             "color:#00ff88;background:rgba(0,255,136,.10);border:1px solid #00ff88"
+        if news >= 0.7:
+            news_label = "HIGH INTENSITY"
+            news_bc    = f"color:{nc};background:rgba(255,59,92,.12);border:1px solid {nc}"
+        elif news >= 0.4:
+            news_label = "MODERATE"
+            news_bc    = "color:#ff9500;background:rgba(255,149,0,.12);border:1px solid #ff9500"
+        else:
+            news_label = "LOW"
+            news_bc    = "color:#00ff88;background:rgba(0,255,136,.10);border:1px solid #00ff88"
 
-        with sig_cols[i % 3]:
+        with sig_cols[i % len(sig_cols)]:
             st.markdown(f"""
-            <div class="signal-card {sc_css}">
-              <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.6rem">
-                <span class="sig-country">{cntry.upper()}</span>
-                <span class="sig-score-big">{score:.3f}</span>
-              </div>
+<div class="signal-card {sc_css}">
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.6rem">
+    <span class="sig-country">{cntry.upper()}</span>
+    <span class="sig-score-big">{score:.3f}</span>
+  </div>
+  <div style="display:flex;gap:6px;margin-bottom:.8rem;flex-wrap:wrap">
+    <span class="news-pill" style="{news_bc}">{news_label}</span>
+    <span class="news-pill badge-{lvl.lower()}">{lvl.upper()}</span>
+  </div>
+  <div class="sig-label">SIGNAL COMPONENTS</div>
+  <div class="sig-bar-row">
+    <span class="sig-bar-label">▸ ML PROB</span>
+    <div class="sig-bar-bg"><div class="sig-bar-fill" style="width:{ml_pct}%;background:#ff9500"></div></div>
+    <span class="sig-bar-val">{cprob:.3f}</span>
+  </div>
+  <div class="sig-bar-row">
+    <span class="sig-bar-label">▸ NEWS RISK</span>
+    <div class="sig-bar-bg"><div class="sig-bar-fill" style="width:{news_pct}%;background:#ff3b5c"></div></div>
+    <span class="sig-bar-val">{news:.3f}</span>
+  </div>
+  <div class="sig-bar-row">
+    <span class="sig-bar-label">▸ COMPOSITE</span>
+    <div class="sig-bar-bg"><div class="sig-bar-fill" style="width:{geo_pct}%;background:#00e5ff"></div></div>
+    <span class="sig-bar-val">{score:.3f}</span>
+  </div>
+  <div style="margin-top:.7rem;padding-top:.6rem;border-top:1px solid #0a2a40;
+              font-family:'Share Tech Mono',monospace;font-size:.58rem;color:#3a6070;
+              display:flex;justify-content:space-between">
+    <span>SRC: ML + NEWS FUSION</span>
+    <span style="color:#1a3a50">LIVE</span>
+  </div>
+</div>""", unsafe_allow_html=True)
 
-              <div style="display:flex;gap:6px;margin-bottom:.8rem;flex-wrap:wrap">
-                <span class="news-pill" style="{news_bc}">{news_label}</span>
-                <span class="news-pill badge-{lvl.lower()}">{lvl.upper()}</span>
-              </div>
-
-              <div class="sig-label">SIGNAL COMPONENTS</div>
-
-              <div class="sig-bar-row">
-                <span class="sig-bar-label">▸ ML CONFLICT PROB</span>
-                <div class="sig-bar-bg"><div class="sig-bar-fill" style="width:{ml_pct}%;background:#ff9500"></div></div>
-                <span class="sig-bar-val">{cprob:.3f}</span>
-              </div>
-              <div class="sig-bar-row">
-                <span class="sig-bar-label">▸ NEWS RISK SCORE</span>
-                <div class="sig-bar-bg"><div class="sig-bar-fill" style="width:{news_pct}%;background:#ff3b5c"></div></div>
-                <span class="sig-bar-val">{news:.3f}</span>
-              </div>
-              <div class="sig-bar-row">
-                <span class="sig-bar-label">▸ COMPOSITE INDEX</span>
-                <div class="sig-bar-bg"><div class="sig-bar-fill" style="width:{geo_pct}%;background:#00e5ff"></div></div>
-                <span class="sig-bar-val">{score:.3f}</span>
-              </div>
-
-              <div style="margin-top:.7rem;padding-top:.6rem;border-top:1px solid #0a2a40;
-                          font-family:'Share Tech Mono',monospace;font-size:.58rem;color:#3a6070;
-                          display:flex;justify-content:space-between">
-                <span>SRC: ML + NEWS FUSION</span>
-                <span style="color:#1a3a50">LIVE FEED</span>
-              </div>
-            </div>""", unsafe_allow_html=True)
-
-# =====================================================
-# TAB 4 — INVESTOR BRIEF
-# =====================================================
-with tab4:
-
-    st.subheader("💹 Investor Intelligence Terminal")
-
-    # =================================================
-    # ACTION ENGINE
-    # =================================================
+elif selected_tab == "Investor Brief":
+    st.markdown(
+        '<div class="section-label">Market Intelligence</div>'
+        '<div class="section-title">Investor Intelligence Terminal</div>',
+        unsafe_allow_html=True,
+    )
 
     def investor_action(risk):
-
-        if risk == "Critical":
-            return "AVOID"
-
-        elif risk == "High":
-            return "HEDGE"
-
-        elif risk == "Medium":
-            return "MONITOR"
-
-        return "STABLE"
-
-    # =================================================
-    # SECTOR MAP
-    # =================================================
+        return {"Critical":"AVOID","High":"HEDGE","Medium":"MONITOR"}.get(risk,"STABLE")
 
     sector_map = {
-
-        "Iran":
-        ("Energy", "Oil export volatility"),
-
-        "Russia":
-        ("Energy", "Global energy disruption"),
-
-        "Ukraine":
-        ("Agriculture", "Grain supply instability"),
-
-        "China":
-        ("Manufacturing", "Supply chain disruption"),
-
-        "Taiwan":
-        ("Semiconductors", "Chip production risk"),
-
-        "Israel":
-        ("Defense", "Regional escalation"),
-
-        "Pakistan":
-        ("Infrastructure", "Political instability"),
-
-        "Syria":
-        ("Logistics", "Conflict-driven disruption")
+        "Iran":     ("Energy",          "Oil export volatility"),
+        "Russia":   ("Energy",          "Global energy disruption"),
+        "Ukraine":  ("Agriculture",     "Grain supply instability"),
+        "China":    ("Manufacturing",   "Supply chain disruption"),
+        "Taiwan":   ("Semiconductors",  "Chip production risk"),
+        "Israel":   ("Defense",         "Regional escalation"),
+        "Pakistan": ("Infrastructure",  "Political instability"),
+        "Syria":    ("Logistics",       "Conflict-driven disruption"),
     }
 
-    # =================================================
-    # METRICS
-    # =================================================
+    screen    = st.session_state.get("screen_width", 1200)
+    is_mobile = screen < 768
 
-    c1, c2, c3, c4 = st.columns(4)
+    if is_mobile:
+        m1, m2 = st.columns(2)
+        m3, m4 = st.columns(2)
+    else:
+        m1, m2, m3, m4 = st.columns(4)
 
-    c1.metric(
-
-        "🚨 Critical Markets",
-
-        int(
-            (
-                filtered_df[
-                    "Dynamic_Risk_Level"
-                ] == "Critical"
-            ).sum()
-        )
-    )
-
-    c2.metric(
-
-        "⚠ High Exposure",
-
-        int(
-            (
-                filtered_df[
-                    "Dynamic_Risk_Level"
-                ] == "High"
-            ).sum()
-        )
-    )
-
-    c3.metric(
-
-        "🌍 Avg GeoRisk",
-
-        round(
-            filtered_df[
-                "GeoRisk_Live_Score"
-            ].mean(),
-            3
-        )
-    )
-
-    c4.metric(
-
-        "📡 Market Signals",
-
-        len(filtered_df)
-    )
+    m1.metric("🚨 Critical", int((filtered_df["Dynamic_Risk_Level"]=="Critical").sum()))
+    m2.metric("⚠ High",     int((filtered_df["Dynamic_Risk_Level"]=="High").sum()))
+    m3.metric("🌍 Avg Risk", round(filtered_df["GeoRisk_Live_Score"].mean(), 3))
+    m4.metric("📡 Signals",  len(filtered_df))
 
     st.markdown("---")
 
-    # =================================================
-    # SEARCH + SORT
-    # =================================================
-
-    s1, s2 = st.columns([2,1])
-
+    s1, s2 = st.columns([2, 1])
     with s1:
-
-        search_country = st.text_input(
-            "🔍 Search Country"
-        )
-
+        search_country = st.text_input("🔍 Search Country")
     with s2:
-
-        sort_option = st.selectbox(
-
-            "Sort By",
-
-            [
-
-                "Highest GeoRisk",
-
-                "Highest News Risk",
-
-                "Alphabetical"
-            ]
-        )
-
-    # =================================================
-    # DATA
-    # =================================================
+        sort_option = st.selectbox("Sort By", ["Highest GeoRisk","Highest News Risk","Alphabetical"])
 
     investor_view = filtered_df.copy()
-
-    # =================================================
-    # SEARCH FILTER
-    # =================================================
-
     if search_country:
-
-        investor_view = investor_view[
-
-            investor_view["Country"]
-
-            .str.contains(
-                search_country,
-                case=False,
-                na=False
-            )
-        ]
-
-    # =================================================
-    # SORTING
-    # =================================================
-
+        investor_view = investor_view[investor_view["Country"].str.contains(search_country, case=False, na=False)]
     if sort_option == "Highest GeoRisk":
-
-        investor_view = investor_view.sort_values(
-
-            "GeoRisk_Live_Score",
-
-            ascending=False
-        )
-
+        investor_view = investor_view.sort_values("GeoRisk_Live_Score", ascending=False)
     elif sort_option == "Highest News Risk":
-
-        investor_view = investor_view.sort_values(
-
-            "News_Risk_Score",
-
-            ascending=False
-        )
-
+        investor_view = investor_view.sort_values("News_Risk_Score", ascending=False)
     else:
+        investor_view = investor_view.sort_values("Country")
 
-        investor_view = investor_view.sort_values(
-            "Country"
-        )
+    if is_mobile:
+        cols = st.columns(1)
+    elif screen < 1024:
+        cols = st.columns(2)
+    else:
+        cols = st.columns(3)
 
-    # =================================================
-    # RESPONSIVE GRID
-    # =================================================
+    risk_emoji = {"Critical":"🔴","High":"🟠","Medium":"🟡"}
 
-    screen = st.session_state.get("screen_width", 1200)
-if screen < 768:
-    cols = st.columns(1)
-elif screen < 1024:
-    cols = st.columns(2)
-else:
-    cols = st.columns(3)
-
-    # =================================================
-    # LOOP
-    # =================================================
-
-    for i, (_, row) in enumerate(
-        investor_view.iterrows()
-    ):
-
+    for i, (_, row) in enumerate(investor_view.iterrows()):
         country = row["Country"]
+        risk    = row["Dynamic_Risk_Level"]
+        score   = float(row["GeoRisk_Live_Score"])
+        news    = float(row["News_Risk_Score"])
+        action  = investor_action(risk)
+        sector, impact = sector_map.get(country, ("Regional Markets","General geopolitical volatility"))
+        emoji   = risk_emoji.get(risk, "🟢")
 
-        risk = row["Dynamic_Risk_Level"]
-
-        score = float(
-            row["GeoRisk_Live_Score"]
-        )
-
-        news = float(
-            row["News_Risk_Score"]
-        )
-
-        action = investor_action(risk)
-
-        sector, impact = sector_map.get(
-
-            country,
-
-            (
-                "Regional Markets",
-                "General geopolitical volatility"
-            )
-        )
-
-        # =============================================
-        # RISK COLORS
-        # =============================================
-
-        if risk == "Critical":
-
-            emoji = "🔴"
-
-        elif risk == "High":
-
-            emoji = "🟠"
-
-        elif risk == "Medium":
-
-            emoji = "🟡"
-
-        else:
-
-            emoji = "🟢"
-
-        # =============================================
-        # CARD
-        # =============================================
-
-        with cols[i % 3]:
-
+        with cols[i % len(cols)]:
             with st.container(border=True):
-
-                top1, top2 = st.columns([3,1])
-
-                with top1:
-
-                    st.markdown(
-                        f"### 🌍 {country}"
-                    )
-
-                with top2:
-
-                    st.markdown(
-                        f"## {emoji}"
-                    )
-
-                # =====================================
-                # METRICS
-                # =====================================
-
-                m1, m2 = st.columns(2)
-
-                m1.metric(
-                    "GeoRisk",
-                    f"{score:.3f}"
-                )
-
-                m2.metric(
-                    "News",
-                    f"{news:.3f}"
-                )
-
-                st.metric(
-                    "Investor Action",
-                    action
-                )
-
-                st.markdown("#### 🏭 Affected Sector")
-
-                st.write(sector)
-
-                st.markdown("#### 📉 Market Impact")
-
-                st.write(impact)
-
-                st.markdown("#### 🧠 Investor Insight")
-
+                t1, t2 = st.columns([3, 1])
+                with t1:
+                    st.markdown(f"### 🌍 {country}")
+                with t2:
+                    st.markdown(f"## {emoji}")
+                c1, c2 = st.columns(2)
+                c1.metric("GeoRisk", f"{score:.3f}")
+                c2.metric("News",    f"{news:.3f}")
+                st.metric("Action",  action)
+                st.markdown(f"**🏭 Sector:** {sector}")
+                st.markdown(f"**📉 Impact:** {impact}")
                 if risk == "Critical":
-
-                    st.error(
-                        "High geopolitical exposure detected. "
-                        "Aggressive positioning not recommended."
-                    )
-
+                    st.error("High geopolitical exposure. Avoid aggressive positioning.")
                 elif risk == "High":
-
-                    st.warning(
-                        "Elevated instability signals detected. "
-                        "Hedging strategies advised."
-                    )
-
+                    st.warning("Elevated instability. Hedging advised.")
                 elif risk == "Medium":
-
-                    st.info(
-                        "Moderate volatility environment. "
-                        "Close monitoring recommended."
-                    )
-
+                    st.info("Moderate volatility. Monitor closely.")
                 else:
+                    st.success("Stable environment.")
 
-                    st.success(
-                        "Stable geopolitical environment."
-                    )
-
-                st.markdown("---")
-
-
-
-with tab5:
-
-    render_ai_tab(
-
-        ai_df,
-
-        df
-    )
+elif selected_tab == "AI Analyst":
+    render_ai_tab(ai_df, df)
