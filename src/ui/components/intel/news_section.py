@@ -217,6 +217,7 @@ def render_news_section(country):
     try:
         # ── Layer 1: news_engine fetch (24h timespan) ──
         articles = fetch_country_news(country)
+        print(f"render_news_section called for {country}")
 
         # ── Layer 2: GDELT direct with 7d timespan ──
         if not articles:
