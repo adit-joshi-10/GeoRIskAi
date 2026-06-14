@@ -4,11 +4,11 @@ src/intelligence/news_engine.py
 Real-time geopolitical intelligence engine.
 Uses GDELT — free, no API key, updates every 15 minutes.
 """
-
 import pandas as pd
 import requests
 import os
 import time
+import streamlit as st
 from datetime import datetime
 
 from src.intelligence.news_filter import is_relevant_geopolitical
@@ -94,6 +94,7 @@ def parse_gdelt_date(date_str):
 # FETCH NEWS FOR DASHBOARD (single country)
 # =====================================================
 
+@st.cache_data(ttl=900)
 def fetch_country_news(country, limit=5):
     """
     Fetch latest geopolitical news for one country from GDELT.
@@ -115,7 +116,7 @@ def fetch_country_news(country, limit=5):
             "maxrecords": 25,
             "format":     "json",
             "sort":       "DateDesc",
-            "timespan":   "24h",
+            "timespan":   "72h",
         }
 
         response = requests.get(
@@ -167,7 +168,46 @@ def fetch_country_news(country, limit=5):
 
             if len(articles) >= limit:
                 break
-        print(f"Final Articles Returned: {len(articles)}")
+                # =====================================================
+        # FALLBACK LOGIC
+        # =====================================================
+
+        if len(articles) == 0 and len(raw_articles) > 0:
+
+            print(
+                f"No relevant articles found for {country}"
+            )
+
+            print(
+                f"Using {min(limit, len(raw_articles))} fallback articles"
+            )
+
+            for a in raw_articles[:limit]:
+
+                articles.append({
+
+                    "title":
+                        a.get("title", "") or "",
+
+                    "source":
+                        a.get("domain", "") or "",
+
+                    "url":
+                        a.get("url", "") or "",
+
+                    "publishedAt":
+                        parse_gdelt_date(
+                            a.get("seendate", "") or ""
+                        ),
+
+                    "description":
+                        "",
+                })
+
+        print(
+            f"Final Articles Returned: {len(articles)}"
+        )
+
         return articles
 
     except Exception as e:
@@ -198,7 +238,7 @@ def fetch_news(country):
             "maxrecords": 25,
             "format":     "json",
             "sort":       "DateDesc",
-            "timespan":   "24h",
+            "timespan":   "72h",
         }
 
         response = requests.get(
