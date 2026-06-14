@@ -99,6 +99,8 @@ def fetch_country_news(country, limit=5):
     Fetch latest geopolitical news for one country from GDELT.
     Real-time — updates every 15 minutes. No API key needed.
     """
+    print("\n" + "="*50)
+    print(f"FETCHING NEWS FOR: {country}")
     try:
         query = (
             f'"{country}" '
@@ -122,6 +124,7 @@ def fetch_country_news(country, limit=5):
             timeout=15,
             headers={"User-Agent": "GeoRiskAI/1.0"},
         )
+        print(f"GDELT Status Code: {response.status_code}")
 
         if response.status_code != 200:
             print(f"GDELT error {response.status_code} for {country}")
@@ -129,6 +132,7 @@ def fetch_country_news(country, limit=5):
 
         data = response.json()
         raw_articles = data.get("articles", [])
+        print(f"Raw Articles Found: {len(raw_articles)}")
 
         articles = []
         for a in raw_articles:
@@ -144,8 +148,13 @@ def fetch_country_news(country, limit=5):
                 "url":         url,
                 "publishedAt": parse_gdelt_date(date),
             }
+            relevant = is_relevant_geopolitical(article_dict)
 
-            if not is_relevant_geopolitical(article_dict):
+            print(
+                f"{title[:50]}... -> {'KEPT' if relevant else 'FILTERED'}"
+            )
+
+            if not relevant:
                 continue
 
             articles.append({
@@ -158,17 +167,14 @@ def fetch_country_news(country, limit=5):
 
             if len(articles) >= limit:
                 break
-         
+        print(f"Final Articles Returned: {len(articles)}")
         return articles
 
     except Exception as e:
         print(f"GDELT fetch failed for {country}: {e}")
         return []
 
-def fetch_country_news(country, limit=5):
 
-    print("\n" + "="*50)
-    print(f"FETCHING NEWS FOR: {country}")
 # =====================================================
 # FETCH NEWS FOR PIPELINE
 # =====================================================
