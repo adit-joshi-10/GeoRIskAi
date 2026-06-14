@@ -94,7 +94,7 @@ def parse_gdelt_date(date_str):
 # FETCH NEWS FOR DASHBOARD (single country)
 # =====================================================
 
-@st.cache_data(ttl=900)
+# @st.cache_data(ttl=900)
 def fetch_country_news(country, limit=5):
     """
     Fetch latest geopolitical news for one country from GDELT.
