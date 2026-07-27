@@ -1,331 +1,231 @@
 """
 src/intelligence/news_engine.py
-Real-time news via MediaStack API — 500 free requests/month
-"""
 
+Real-time geopolitical intelligence engine.
+Uses GDELT — free, no API key, updates every 15 minutes.
+"""
 import pandas as pd
 import requests
 import os
 import time
-import feedparser
 from datetime import datetime
 
-from src.intelligence.news_filter import is_relevant_geopolitical
+try:
+    from src.intelligence.news_filter import is_relevant_geopolitical
+except Exception:
+    def is_relevant_geopolitical(article):
+        text = " ".join(
+            [
+                str(article.get("title", "")),
+                str(article.get("description", "")),
+            ]
+        ).lower()
+        keywords = [
+            "war", "invasion", "missile", "airstrike", "military", "conflict",
+            "terrorism", "nuclear", "sanctions", "rebels", "attack",
+            "violence", "protest", "border", "crisis", "troops",
+            "cyberattack", "inflation", "economic collapse", "market panic",
+        ]
+        return any(keyword in text for keyword in keywords)
 
 # =====================================================
 # CONFIG
 # =====================================================
 
-MEDIASTACK_KEY = "2a72c99f10e891b1000dc305e8024fba"
-MEDIASTACK_URL = "http://api.mediastack.com/v1/news"
+NEWSDATA_API_KEY = "pub_4059a784c6de403cbdbf08aad49a98cc"
+NEWSDATA_URL = "https://newsdata.io/api/1/latest"
 
-GDELT_DOC_URL  = "https://api.gdeltproject.org/api/v2/doc/doc"
+OUTPUT_PATH = os.path.join(
+    "data",
+    "processed",
+    "live_news_risk.csv"
+)
 
-RSS_FEEDS = [
-    "http://feeds.bbci.co.uk/news/world/rss.xml",
-    "https://feeds.reuters.com/reuters/worldNews",
-    "https://www.aljazeera.com/xml/rss/all.xml",
-    "https://rss.dw.com/rdf/rss-en-world",
-    "https://feeds.skynews.com/feeds/rss/world.xml",
-]
+# =====================================================
+# KEYWORD WEIGHTS
+# =====================================================
 
 KEYWORD_WEIGHTS = {
-    "war": 10, "invasion": 10, "missile": 9,
-    "airstrike": 9, "military": 8, "conflict": 8,
-    "terrorism": 9, "nuclear": 10, "sanctions": 7,
-    "rebels": 7, "attack": 8, "violence": 7,
-    "protest": 5, "border": 5, "crisis": 6,
-    "troops": 6, "cyberattack": 7, "killed": 8,
-    "bombing": 9, "ceasefire": 6, "offensive": 7,
+    "war":               10,
+    "invasion":          10,
+    "missile":            9,
+    "airstrike":          9,
+    "military":           8,
+    "conflict":           8,
+    "terrorism":          9,
+    "nuclear":           10,
+    "sanctions":          7,
+    "rebels":             7,
+    "attack":             8,
+    "violence":           7,
+    "protest":            5,
+    "border":             5,
+    "crisis":             6,
+    "troops":             6,
+    "cyberattack":        7,
+    "inflation":          4,
+    "economic collapse":  7,
+    "market panic":       6,
 }
 
+# =====================================================
+# COUNTRIES TO TRACK
+# =====================================================
+
 TRACKED_COUNTRIES = [
-    "Russia", "Ukraine", "Iran", "Israel", "China",
-    "Taiwan", "North Korea", "South Korea", "United States",
-    "India", "Pakistan", "Syria", "Afghanistan", "Venezuela",
+    "Russia",
+    "Ukraine",
+    "Iran",
+    "Israel",
+    "China",
+    "Taiwan",
+    "North Korea",
+    "South Korea",
+    "United States",
+    "India",
+    "Pakistan",
+    "Syria",
+    "Afghanistan",
+    "Venezuela",
 ]
 
-OUTPUT_PATH = os.path.join("data", "processed", "live_news_risk.csv")
+
+# =====================================================
+# HELPER
+# =====================================================
+
+def safe_get(lst, i):
+    return lst[i] if len(lst) > i else ""
+
+
+def parse_gdelt_date(date_str):
+    if not date_str:
+        return ""
+
+    if not isinstance(date_str, str):
+        date_str = str(date_str)
+
+    date_str = date_str.strip()
+
+    if len(date_str) >= 15 and date_str[:8].isdigit():
+        try:
+            dt = datetime.strptime(date_str[:15], "%Y%m%dT%H%M%S")
+            return dt.strftime("%Y-%m-%d %H:%M")
+        except Exception:
+            pass
+
+    if len(date_str) >= 10:
+        return date_str[:10]
+
+    return ""
 
 
 # =====================================================
-# LAYER 1 — MEDIASTACK
+# FETCH NEWS FOR DASHBOARD (single country)
 # =====================================================
 
-def fetch_via_mediastack(country, limit=8):
+# @st.cache_data(ttl=900)
+def fetch_country_news(country, limit=5):
+    """
+    Fetch latest geopolitical news for one country from NewsData.
+    Returns a list of relevant articles.
+    """
+    print("\n" + "=" * 50)
+    print(f"FETCHING NEWS FOR: {country}")
+
     try:
         params = {
-            "access_key": MEDIASTACK_KEY,
-            "keywords":   f"{country} conflict war military attack",
-            "languages":  "en",
-            "sort":       "published_desc",
-            "limit":      25,
+            "apikey": NEWSDATA_API_KEY,
+            "q": country,
+            "language": "en",
+            "size": max(limit, 10),
         }
+
         response = requests.get(
-            MEDIASTACK_URL,
+            NEWSDATA_URL,
             params=params,
-            timeout=15,
+            timeout=20,
         )
+        print(f"NewsData Status Code: {response.status_code}")
+
         if response.status_code != 200:
+            print(f"NewsData error {response.status_code} for {country}")
             return []
 
-        data     = response.json()
-        articles = data.get("data", [])
+        data = response.json()
+        raw_articles = data.get("results", [])
+        print(f"Raw Articles Found: {len(raw_articles)}")
 
-        results = []
-        for a in articles:
-            title  = a.get("title", "") or ""
-            url    = a.get("url", "") or ""
-            source = a.get("source", "") or ""
-            date   = a.get("published_at", "") or ""
-
-            if not title or title == "[Removed]":
-                continue
-
-            article_dict = {
-                "title":       title,
-                "description": a.get("description", "") or "",
-                "source":      {"name": source},
-                "url":         url,
-                "publishedAt": date[:10],
-            }
-
-            if is_relevant_geopolitical(article_dict):
-                results.append({
-                    "title":       title,
-                    "source":      source,
-                    "url":         url,
-                    "publishedAt": date[:10],
-                    "description": a.get("description", "") or "",
-                })
-
-            if len(results) >= limit:
-                break
-
-        return results
-
-    except Exception as e:
-        print(f"MediaStack failed for {country}: {e}")
-        return []
-
-
-# =====================================================
-# LAYER 2 — GDELT
-# =====================================================
-
-def fetch_via_gdelt(country, timespan="7d"):
-    try:
-        params = {
-            "query":      f"{country} conflict OR war OR military OR attack",
-            "mode":       "artlist",
-            "maxrecords": 25,
-            "format":     "json",
-            "sort":       "DateDesc",
-            "timespan":   timespan,
-        }
-        response = requests.get(
-            GDELT_DOC_URL,
-            params=params,
-            timeout=15,
-            headers={"User-Agent": "GeoRiskAI/1.0"},
-        )
-        if response.status_code != 200:
-            return []
-
-        data        = response.json()
-        raw_articles = data.get("articles", [])
-
-        results = []
+        articles = []
         for a in raw_articles:
-            title  = a.get("title", "") or ""
-            url    = a.get("url", "") or ""
-            source = a.get("domain", "") or ""
-            date   = a.get("seendate", "") or ""
-
-            try:
-                dt       = datetime.strptime(date[:15], "%Y%m%dT%H%M%S")
-                readable = dt.strftime("%Y-%m-%d")
-            except Exception:
-                readable = date[:10]
-
-            if not title:
-                continue
+            title = (a.get("title") or "").strip()
+            url = a.get("link") or a.get("url") or ""
+            source_name = a.get("source_name") or a.get("domain") or ""
+            date = a.get("pubDate") or a.get("created_at") or ""
+            description = a.get("description") or ""
 
             article_dict = {
-                "title":       title,
-                "description": "",
-                "source":      {"name": source},
-                "url":         url,
-                "publishedAt": readable,
+                "title": title,
+                "description": description,
+                "source": {"name": source_name},
+                "url": url,
+                "publishedAt": parse_gdelt_date(date),
             }
+            relevant = is_relevant_geopolitical(article_dict)
 
-            if is_relevant_geopolitical(article_dict):
-                results.append({
-                    "title":       title,
-                    "source":      source,
-                    "url":         url,
-                    "publishedAt": readable,
-                    "description": "",
+            print(f"{title[:50]}... -> {'KEPT' if relevant else 'FILTERED'}")
+
+            if not relevant:
+                continue
+
+            articles.append({
+                "title": title,
+                "source": {"name": source_name},
+                "url": url,
+                "publishedAt": parse_gdelt_date(date),
+                "description": description,
+            })
+
+            if len(articles) >= limit:
+                break
+
+        if len(articles) == 0 and len(raw_articles) > 0:
+            print(f"No relevant articles found for {country}")
+            print(f"Using {min(limit, len(raw_articles))} fallback articles")
+
+            for a in raw_articles[:limit]:
+                articles.append({
+                    "title": (a.get("title") or "").strip(),
+                    "source": {"name": (a.get("source_name") or a.get("domain") or "")},
+                    "url": a.get("url") or a.get("link") or "",
+                    "publishedAt": parse_gdelt_date(
+                        (a.get("pubDate") or a.get("created_at") or "")
+                    ),
+                    "description": (a.get("description") or ""),
                 })
 
-        return results
+        print(f"Final Articles Returned: {len(articles)}")
+        return articles
 
     except Exception as e:
-        print(f"GDELT failed for {country}: {e}")
+        print(f"NewsData fetch failed for {country}: {e}")
         return []
 
 
 # =====================================================
-# LAYER 3 — RSS FEEDS
-# =====================================================
-
-def fetch_via_rss(country, limit=8):
-    try:
-        results = []
-        for feed_url in RSS_FEEDS:
-            try:
-                feed = feedparser.parse(feed_url)
-                for entry in feed.entries:
-                    title   = entry.get("title", "") or ""
-                    summary = entry.get("summary", "") or ""
-                    link    = entry.get("link", "") or ""
-                    date    = entry.get("published", "") or ""
-                    combined = (title + " " + summary).lower()
-
-                    if country.lower() not in combined:
-                        continue
-
-                    article_dict = {
-                        "title":       title,
-                        "description": summary,
-                        "source":      {"name": feed.feed.get("title", "")},
-                        "url":         link,
-                        "publishedAt": date[:10],
-                    }
-
-                    if is_relevant_geopolitical(article_dict):
-                        results.append({
-                            "title":       title,
-                            "source":      feed.feed.get("title", "RSS"),
-                            "url":         link,
-                            "publishedAt": date[:10],
-                            "description": summary,
-                        })
-
-                    if len(results) >= limit:
-                        break
-
-            except Exception:
-                continue
-
-            if len(results) >= limit:
-                break
-
-        return results
-
-    except Exception as e:
-        print(f"RSS failed for {country}: {e}")
-        return []
-
-
-# =====================================================
-# LAYER 4 — RSS ANY MENTION (last resort)
-# =====================================================
-
-def fetch_rss_any_mention(country, limit=5):
-    try:
-        results = []
-        for feed_url in RSS_FEEDS:
-            try:
-                feed = feedparser.parse(feed_url)
-                for entry in feed.entries:
-                    title   = entry.get("title", "") or ""
-                    summary = entry.get("summary", "") or ""
-                    link    = entry.get("link", "") or ""
-                    date    = entry.get("published", "") or ""
-                    combined = (title + " " + summary).lower()
-
-                    if country.lower() in combined:
-                        results.append({
-                            "title":       title,
-                            "source":      feed.feed.get("title", "RSS"),
-                            "url":         link,
-                            "publishedAt": date[:10],
-                            "description": summary,
-                        })
-
-                    if len(results) >= limit:
-                        break
-
-            except Exception:
-                continue
-
-            if len(results) >= limit:
-                break
-
-        return results
-
-    except Exception as e:
-        return []
-
-
-# =====================================================
-# MAIN FETCH — 4 LAYER FALLBACK
-# =====================================================
-
-def fetch_country_news(country, limit=8):
-    """
-    4-layer fallback:
-    1. MediaStack API (most reliable)
-    2. GDELT 7d
-    3. GDELT 30d
-    4. RSS geopolitical filtered
-    5. RSS any mention
-    """
-    # Layer 1 — MediaStack
-    articles = fetch_via_mediastack(country, limit)
-    if articles:
-        print(f"MediaStack OK for {country}: {len(articles)} articles")
-        return articles
-
-    # Layer 2 — GDELT 7d
-    articles = fetch_via_gdelt(country, timespan="7d")
-    if articles:
-        print(f"GDELT 7d OK for {country}: {len(articles)} articles")
-        return articles[:limit]
-
-    # Layer 3 — GDELT 30d
-    articles = fetch_via_gdelt(country, timespan="30d")
-    if articles:
-        print(f"GDELT 30d OK for {country}: {len(articles)} articles")
-        return articles[:limit]
-
-    # Layer 4 — RSS filtered
-    articles = fetch_via_rss(country, limit)
-    if articles:
-        print(f"RSS OK for {country}: {len(articles)} articles")
-        return articles
-
-    # Layer 5 — RSS any mention
-    articles = fetch_rss_any_mention(country, limit)
-    if articles:
-        print(f"RSS any OK for {country}: {len(articles)} articles")
-        return articles
-
-    print(f"All layers failed for {country}")
-    return []
-
-
-# =====================================================
-# FETCH NEWS (pipeline use)
+# FETCH NEWS FOR PIPELINE
 # =====================================================
 
 def fetch_news(country):
+    """
+    Fetch and filter geopolitical articles for a country.
+    Returns list of relevant articles.
+    """
     return fetch_country_news(country, limit=10)
 
 
 # =====================================================
-# RISK SCORING
+# CALCULATE NEWS RISK SCORE
 # =====================================================
 
 def calculate_risk_score(articles):
@@ -349,6 +249,10 @@ def calculate_risk_score(articles):
     return total_score, matched_keywords
 
 
+# =====================================================
+# NORMALIZE SCORES
+# =====================================================
+
 def normalize_scores(df):
     max_score = df["Raw_Score"].max()
     if max_score == 0:
@@ -358,15 +262,19 @@ def normalize_scores(df):
     return df
 
 
+# =====================================================
+# CLASSIFY RISK
+# =====================================================
+
 def classify_live_risk(score):
-    if score >= 0.75:   return "Critical"
-    elif score >= 0.50: return "High"
-    elif score >= 0.25: return "Medium"
-    else:               return "Low"
-
-
-def safe_get(lst, i):
-    return lst[i] if len(lst) > i else ""
+    if score >= 0.75:
+        return "Critical"
+    elif score >= 0.50:
+        return "High"
+    elif score >= 0.25:
+        return "Medium"
+    else:
+        return "Low"
 
 
 # =====================================================
@@ -374,19 +282,29 @@ def safe_get(lst, i):
 # =====================================================
 
 def run_news_engine():
-    print(f"\nStarting engine — {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+    print("\nStarting live geopolitical intelligence engine...\n")
+    print(f"Timestamp: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
 
     results = []
 
     for country in TRACKED_COUNTRIES:
         print(f"Analyzing {country}...")
-        articles              = fetch_news(country)
-        raw_score, keywords   = calculate_risk_score(articles)
 
-        top_titles  = [a.get("title", "")                          for a in articles[:5]]
-        top_sources = [a.get("source", "")                         for a in articles[:5]]
-        top_urls    = [a.get("url", "")                            for a in articles[:5]]
-        top_dates   = [a.get("publishedAt", "")                    for a in articles[:5]]
+        articles    = fetch_news(country)
+        raw_score, keywords = calculate_risk_score(articles)
+
+        top_titles  = []
+        top_sources = []
+        top_urls    = []
+        top_dates   = []
+
+        for article in articles[:5]:
+            top_titles.append(article.get("title", ""))
+            top_sources.append(
+                article.get("source", {}).get("name", "")
+            )
+            top_urls.append(article.get("url", ""))
+            top_dates.append(article.get("publishedAt", ""))
 
         results.append({
             "Country":          country,
@@ -410,7 +328,7 @@ def run_news_engine():
             "Date_3":           safe_get(top_dates, 2),
         })
 
-        time.sleep(0.3)
+        time.sleep(0.5)
 
     df = pd.DataFrame(results)
     df = normalize_scores(df)
@@ -419,10 +337,19 @@ def run_news_engine():
     os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
     df.to_csv(OUTPUT_PATH, index=False)
 
-    print("\nEngine complete.")
-    print(df[["Country", "Articles_Fetched", "Live_Risk_Level"]].to_string(index=False))
+    print("\nLive intelligence completed.\n")
+    print(
+        df[["Country", "Articles_Fetched", "Live_Risk_Level", "Last_Updated"]]
+        .to_string(index=False)
+    )
+    print(f"\nSaved to: {OUTPUT_PATH}")
+
     return df
 
+
+# =====================================================
+# EXECUTE
+# =====================================================
 
 if __name__ == "__main__":
     run_news_engine()
